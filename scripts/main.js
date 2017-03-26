@@ -22,20 +22,33 @@ $(function(){
     }
   }
 
-      new jvm.MultiMap({
-        container: $('#modalMap'),
-        maxLevel: 1,
-        main: {
-          map: 'world_mill'
-        },
-        mapUrlByCode: function(code, multiMap){
-          return '/jquery-jvectormap-'+
-          countryMap.map+'.js';
-           console.log('map URL works');
-    }
-  });
+// This is the drill down functionality
+  // new jvm.MultiMap({
+  //   container: $('#modalMap'),
+  //   maxLevel: 1,
+  //   main: {
+  //     map: 'world_mill'
+  //   },
+  //   mapUrlByCode: function(code, multiMap){
+  //     return 'scripts/jquery-jvectormap-fr_regions_mill.js';
+  //   }
+  // });
 
-  var option = {
+  function testClick(){
+    handleRegionClick();
+    new jvm.MultiMap({
+      container: $('#modalMap'),
+      maxLevel: 1,
+      main: {
+        map: 'world_mill'
+      },
+      mapUrlByCode: function(code, multiMap){
+        return 'scripts/jquery-jvectormap-fr_regions_mill.js';
+      }
+  });  
+  }
+
+  var world = {
     map: 'world_mill',
     backgroundColor: 'transparent',
     zoomOnScroll: false,
@@ -57,7 +70,7 @@ $(function(){
     }
   }
 
-    option.onRegionClick = handleRegionClick;
+    world.onRegionClick = testClick;
     
     //reset map focus to the origin of 0,0
     $('button').click(reset);
@@ -71,7 +84,7 @@ $(function(){
       });
     }
 
-    option.series = {
+    world.series = {
       regions: [{
        values: {
          'AU': '#9932CC',
@@ -89,7 +102,7 @@ $(function(){
      }
 
 
-    $('#world-map').vectorMap(option);
+    $('#world-map').vectorMap(world);
 
 
    function handleRegionClick(event, code) {
@@ -141,7 +154,7 @@ $(function(){
 
  
    function callCountryMap(countryMap, countryName){
-      console.log(countryMap);
+     
       $('.header').html(countryName);
       $('#modalMap').html('');
       $('#modalMap').vectorMap(countryMap);
