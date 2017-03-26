@@ -7,9 +7,9 @@ $(function(){
     grapes: ['Cabernet Sauvignon', 'Merlot', 'Petit Verdot', 'Cabernet Franc', 'Syrah']
 
   }
-  
-  var frenchMap = {
-    map: 'fr_regions_mill',
+
+  var countryMap = {
+    map: '',
     backgroundColor: 'transparent',
     regionStyle: {
       initial: {
@@ -22,6 +22,18 @@ $(function(){
     }
   }
 
+      new jvm.MultiMap({
+        container: $('#modalMap'),
+        maxLevel: 1,
+        main: {
+          map: 'world_mill'
+        },
+        mapUrlByCode: function(code, multiMap){
+          return '/jquery-jvectormap-'+
+          countryMap.map+'.js';
+           console.log('map URL works');
+    }
+  });
 
   var option = {
     map: 'world_mill',
@@ -76,61 +88,66 @@ $(function(){
       }]
      }
 
-     //using the Labels object and the render function
-     option.labels = {
-      render: {
-        'FR': 'Bordeaux',
-        'ES': 'Rioja'
-      }
-     }
 
     $('#world-map').vectorMap(option);
 
-    $('#france-map').vectorMap(frenchMap);
-    $('#france-map').vectorMap('set', 'focus', {
-        scale: 1,
-        x: 0.5,
-        y: 0.5   
-      });
-
-    // $('#france-map').vectorMap('set', 'focus', 1);
-
-
-    function wineLabel (event, code) {
-      if (code == 'FR'){
-        console.log(franceWineInfo.regions);
-
-      }
-      else if (code == 'ZA'){
-        console.log('Shiraz');
-      }
-      else if (code == 'US'){
-        console.log('Cabernet Sauvignon');
-      }
-      else if (code == 'AR'){
-        console.log('Malbec');
-      }
-    }
 
    function handleRegionClick(event, code) {
      //This will be the code to zoom in on a country when selected if a region map is available
      if (code === 'FR'){
-      $('.ui.modal').modal('show');
+      countryMap.map = 'fr_regions_mill';
+      countryName = 'France';
+      callCountryMap(countryMap, countryName);
+     }
+
+     else if (code === 'US'){
+      countryMap.map = 'us_aea';
+      countryName = 'United States';
+      callCountryMap(countryMap, countryName);    
+     }
+
+     else if (code === 'ES'){
+      countryMap.map = 'es_mill';
+      countryName = 'Spain';
+      callCountryMap(countryMap, countryName);
+     }
+
+     else if (code === 'AR'){
+      countryMap.map = 'ar_mill';
+      countryName = 'Argentina';
+      callCountryMap(countryMap, countryName);
+     }
+
+     else if (code === 'IT'){
+      countryMap.map = 'it_regions_mill';
+      countryName = 'Italy';
+      callCountryMap(countryMap, countryName);
+     }
+
+     else if (code === 'ZA'){
+      countryMap.map = 'za_mill';
+      countryName = 'South Africa';
+      callCountryMap(countryMap, countryName);
      }
 
      else {
 
-       console.log('this: ', this);
-       console.log('event: ', event);
-       console.log('code: ', code);
-
-    }
+      }
        // Since we get the country code, let's do something with it.
-     wineLabel(event, code);
      focusOnClickedCountry(code);
    }
 
 
+
+ 
+   function callCountryMap(countryMap, countryName){
+      console.log(countryMap);
+      $('.header').html(countryName);
+      $('#modalMap').html('');
+      $('#modalMap').vectorMap(countryMap);
+      // $('#modalMap').updateSize();
+      $('.ui.modal').modal('show');
+   }
 
    function focusOnClickedCountry(code) {
      $('#world-map').vectorMap('set', 'focus', {
@@ -143,11 +160,6 @@ $(function(){
        animate: true
    });
  }
-
-  // function mapReset(){
-  //     $('#world-map').reset();
-  //     console.log('pressed reset');
-  //   };
 
 
 

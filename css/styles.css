@@ -60,12 +60,8 @@ a:hover {
 .welcome p {
   color: #fff;
   margin: 3em;
-}
-
-.browse {
-  text-align: center;
-  justify-content: flex-end;
-  margin-top: 25em;
+  padding: 1em;
+  align-content: center;
 }
 
 #world-map {
@@ -78,11 +74,15 @@ a:hover {
 }
 
 button {
-  width: 20%;
+  width: 10%;
+  border-radius: 25px;
   align-self: center;
-  margin-bottom: 5em;
+  text-align: center;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+  border-style: none;
 }
-
+/*
 #france-map {
   align-content: center;
   height: 80vh;
@@ -90,8 +90,13 @@ button {
   margin: 0em 5em 5em 5em;
   border: 1px #333 solid;
   border-radius: 25px;  
-}
+}*/
 
 .pop-up {
   width: 80%;
+  height: 80vh;
+}
+
+#modalMap .jvectormap-container {
+  height: 80vh;
 }
