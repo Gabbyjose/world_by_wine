@@ -1,5 +1,6 @@
 body {
   background-color: #EEE;
+  margin: auto 0;
 }
 
 nav {
@@ -16,7 +17,6 @@ nav {
   text-decoration: none;
   width: 200px;
   outline: 1px black solid;
-
 }
 
 
@@ -47,8 +47,14 @@ a {
   outline: 1px black solid;
   margin: 5em;
   text-decoration: none;
-  background-color: #EEE;
+  background-color: transparent;
   padding: 1em;
+  color: white;
+}
+
+a:hover {
+  color: #EEE;
+  outline: 0px;
 }
 
 .welcome p {
@@ -75,4 +81,17 @@ button {
   width: 20%;
   align-self: center;
   margin-bottom: 5em;
+}
+
+#france-map {
+  align-content: center;
+  height: 80vh;
+  width: 80%;
+  margin: 0em 5em 5em 5em;
+  border: 1px #333 solid;
+  border-radius: 25px;  
+}
+
+.pop-up {
+  width: 80%;
 }

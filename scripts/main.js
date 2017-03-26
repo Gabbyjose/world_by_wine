@@ -1,5 +1,28 @@
 $(function(){
 
+
+  //declaring wine objects
+  var franceWineInfo = {
+    regions: ['Bordeaux', 'Rhone', 'Loire', 'Champagne'],
+    grapes: ['Cabernet Sauvignon', 'Merlot', 'Petit Verdot', 'Cabernet Franc', 'Syrah']
+
+  }
+  
+  var frenchMap = {
+    map: 'fr_regions_mill',
+    backgroundColor: 'transparent',
+    regionStyle: {
+      initial: {
+        fill: 'purple',
+        "fill-opacity": 1,
+        stroke: 'none',
+        "stroke-width": 0,
+        "stroke-opacity": 1
+      }
+    }
+  }
+
+
   var option = {
     map: 'world_mill',
     backgroundColor: 'transparent',
@@ -25,9 +48,16 @@ $(function(){
     option.onRegionClick = handleRegionClick;
     
     //reset map focus to the origin of 0,0
-    $('button').click(function(){
-      $('#world-map').vectorMap('set', 'focus', 1, 0, 0);
-    });
+    $('button').click(reset);
+
+    function reset (){
+       $('#world-map').vectorMap('set', 'focus', {
+        scale: 1,
+        x: 0,
+        y: 0,
+        animate: true     
+      });
+    }
 
     option.series = {
       regions: [{
@@ -56,10 +86,20 @@ $(function(){
 
     $('#world-map').vectorMap(option);
 
+    $('#france-map').vectorMap(frenchMap);
+    $('#france-map').vectorMap('set', 'focus', {
+        scale: 1,
+        x: 0.5,
+        y: 0.5   
+      });
+
+    // $('#france-map').vectorMap('set', 'focus', 1);
+
 
     function wineLabel (event, code) {
       if (code == 'FR'){
-        console.log(franceWineInfo);
+        console.log(franceWineInfo.regions);
+
       }
       else if (code == 'ZA'){
         console.log('Shiraz');
@@ -74,12 +114,8 @@ $(function(){
 
    function handleRegionClick(event, code) {
      //This will be the code to zoom in on a country when selected if a region map is available
-     if (code=='AR'){
-        // function(code, multiMap){
-        //   return 'jquery-jvectormap-data-'+
-        //          code.toLowerCase()+'-'+
-        //          multiMap.defaultProjection+'-en.js';
-        // }
+     if (code === 'FR'){
+      $('.ui.modal').modal('show');
      }
 
      else {
@@ -93,6 +129,7 @@ $(function(){
      wineLabel(event, code);
      focusOnClickedCountry(code);
    }
+
 
 
    function focusOnClickedCountry(code) {
@@ -113,13 +150,6 @@ $(function(){
   //   };
 
 
-  //declaring wine objects
-  var franceWineInfo = {
-    regions: ['Bordeaux', 'Rhone', 'Loire', 'Champagne'],
-    grapes: ['Cabernet Sauvignon', 'Merlot', 'Petit Verdot', 'Cabernet Franc', 'Syrah']
-
-  }
-  
 
 
 });

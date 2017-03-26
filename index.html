@@ -6,6 +6,7 @@
     <title></title>
     
     <link rel="stylesheet" href="css/jquery-jvectormap.css" type="text/css" media="screen">
+    <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -13,7 +14,7 @@
 
 <!-- nav just in case I need it for other parts of the site -->
       <nav>
-        <div class="nav-item">France</div>
+        <a class="nav-item" href="france.html">France</a>
         <div class="nav-item">Browse</div>
         <div class="nav-item">Fermentation</div>
       </nav>
@@ -31,10 +32,32 @@
     </div>
 
 
+    <div class="ui modal pop-up">
+      <i class="close icon"></i>
+      <div class="header">
+        France
+      </div>
+      <div class="image content">
+
+
+        <div class="description pop-up">
+          <div id="france-map"></div>
+<!--         this information needs to be variable and pull from the declared objects -->
+          <!-- <p>Regions: franceWineInfo.regions</p>
+          <p>Grapes: franceWineInfo.grapes</p> -->
+        </div>
+      </div>
+
+    </div>
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="scripts/jquery-jvectormap.js"></script>
     <script src="scripts/jquery-jvectormap-2.0.3.min.js"></script>
     <script src="scripts/jquery-jvectormap-world-mill.js"></script>
+    <script src="scripts/jquery-jvectormap-fr_regions-mill.js"></script>
+    <script src="Semantic-UI-CSS-master/semantic.min.js"></script>
     <script src="scripts/main.js"></script>
 
   </body>
