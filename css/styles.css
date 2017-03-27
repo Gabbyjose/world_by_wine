@@ -34,13 +34,11 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  background-size: cover;
 }
 
 .welcome {
   height: 200vh;
-  width: 100%;
-  padding: 5%;
+  width: 80vw;
   display: flex;
   flex-direction: column;
 }
