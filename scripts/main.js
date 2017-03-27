@@ -1,13 +1,6 @@
 $(function(){
 
 
-  //declaring wine objects
-  var franceWineInfo = {
-    regions: ['Bordeaux', 'Rhone', 'Loire', 'Champagne'],
-    grapes: ['Cabernet Sauvignon', 'Merlot', 'Petit Verdot', 'Cabernet Franc', 'Syrah']
-
-  }
-
   var countryMap = {
     map: '',
     backgroundColor: 'transparent',
@@ -22,20 +15,11 @@ $(function(){
     }
   }
 
-// This is the drill down functionality
-  // new jvm.MultiMap({
-  //   container: $('#modalMap'),
-  //   maxLevel: 1,
-  //   main: {
-  //     map: 'world_mill'
-  //   },
-  //   mapUrlByCode: function(code, multiMap){
-  //     return 'scripts/jquery-jvectormap-fr_regions_mill.js';
-  //   }
-  // });
+//This is the drill down functionality
 
-  function testClick(){
-    handleRegionClick();
+  function testClick(event, code){
+    console.log('testing the click funtion');
+    handleRegionClick(event, code);
     new jvm.MultiMap({
       container: $('#modalMap'),
       maxLevel: 1,
@@ -48,7 +32,7 @@ $(function(){
   });  
   }
 
-  var world = {
+  var worldMap = {
     map: 'world_mill',
     backgroundColor: 'transparent',
     zoomOnScroll: false,
@@ -63,47 +47,34 @@ $(function(){
       hover: {
         "fill-opacity": 0.8,
         cursor: 'pointer'
-      },
-      selected: {
-        fill: 'red'
-      }  
+      }
     }
   }
 
-    world.onRegionClick = testClick;
-    
-    //reset map focus to the origin of 0,0
-    $('button').click(reset);
+  worldMap.series = {
+    regions: [{
+      values: {
+        'AU': '#9932CC',
+        'FR': 'indigo',
+        'ZA': '#9932CC',
+        'US': '#9932CC',
+        'AR': '#9932CC',
+        'ES': 'purple',
+        'IT': 'purple',
+        'PT': '#9400D3',
+        'DE': '#9400D3'
+      },
+    attribute: 'fill'
+    }]
+  }
 
-    function reset (){
-       $('#world-map').vectorMap('set', 'focus', {
-        scale: 1,
-        x: 0,
-        y: 0,
-        animate: true     
-      });
-    }
+  worldMap.onRegionClick = testClick;
+  $('#world-map').vectorMap(worldMap);
 
-    world.series = {
-      regions: [{
-       values: {
-         'AU': '#9932CC',
-         'FR': 'indigo',
-         'ZA': '#9932CC',
-         'US': '#9932CC',
-         'AR': '#9932CC',
-         'ES': 'purple',
-         'IT': 'purple',
-         'PT': '#9400D3',
-         'DE': '#9400D3'
-       },
-       attribute: 'fill'
-      }]
-     }
+  
 
-
-    $('#world-map').vectorMap(world);
-
+  //reset map focus to the origin of 0,0
+  $('button').click(reset);
 
    function handleRegionClick(event, code) {
      //This will be the code to zoom in on a country when selected if a region map is available
@@ -144,17 +115,21 @@ $(function(){
      }
 
      else {
-
-      }
-       // Since we get the country code, let's do something with it.
-     focusOnClickedCountry(code);
+      focusOnClickedCountry(code);
+     }
    }
 
-
+  function reset (){
+     $('#world-map').vectorMap('set', 'focus', {
+      scale: 1,
+      x: 0,
+      y: 0,
+      animate: true     
+    });
+  }
 
  
    function callCountryMap(countryMap, countryName){
-     
       $('.header').html(countryName);
       $('#modalMap').html('');
       $('#modalMap').vectorMap(countryMap);
@@ -171,8 +146,8 @@ $(function(){
         */
        region: code,
        animate: true
-   });
- }
+    });
+  }
 
 
 
