@@ -27,6 +27,7 @@ $(function(){
         map: 'world_mill'
       },
       mapUrlByCode: function(code, multiMap){
+        console.log('is the URL working?');
         return 'scripts/jquery-jvectormap-fr_regions_mill.js';
       }
   });  
