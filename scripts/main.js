@@ -1,21 +1,7 @@
 $(function(){
 
 
-  var countryMap = {
-    map: '',
-    backgroundColor: 'transparent',
-    regionStyle: {
-      initial: {
-        fill: 'purple',
-        "fill-opacity": 1,
-        stroke: 'none',
-        "stroke-width": 0,
-        "stroke-opacity": 1
-      }
-    }
-  }
-
-//This is the drill down functionality
+//defining my maps below
 
   var worldMap = {
     map: 'world_mill',
@@ -200,6 +186,7 @@ $(function(){
     }]
   }
 
+//this sets up the 'handle region click' function when user interacts with map
   worldMap.onRegionClick = handleRegionClick;
   franceMap.onRegionClick = handleSubRegionClick;
   argentinaMap.onRegionClick = handleSubRegionClick;
@@ -207,7 +194,7 @@ $(function(){
   usMap.onRegionClick = handleSubRegionClick;
   southAfricaMap.onRegionClick = handleSubRegionClick;
 
-
+//this loads all the maps when the page loads, but only the world map is visible at first
   $('#world-map').vectorMap(worldMap);
   $('#france-map').vectorMap(franceMap);
   $('#us-map').vectorMap(usMap);  
@@ -219,46 +206,24 @@ $(function(){
   $('button').click(reset);
 
    function handleRegionClick(event, code) {
-     //This will be the code to zoom in on a country when selected if a region map is available
+     //This will be the code that either calls up the regional map if it's available, or zoom into a country
      if (code === 'FR'){
       callCountryMap('franceMap', 'france', code);
-
-      // focusOnClickedCountry(code);
-      // $('#france-map').toggleClass('hide');
-      // hideWorldMap();
-      // countryMap = 'francMap';
-      // countryName = 'France';
-      // callCountryMap(countryMap, countryName);
      }
 
      else if (code === 'US'){
-      callCountryMap('usMap', 'us', code);
-      // countryMap.map = 'us_aea';
-      // countryName = 'United States';
-      // callCountryMap(countryMap, countryName);    
+      callCountryMap('usMap', 'us', code); 
      }
 
      else if (code === 'ES'){
       callCountryMap('spainMap', 'spain', code);
-      // countryMap.map = 'es_mill';
-      // countryName = 'Spain';
-      // callCountryMap(countryMap, countryName);
+
      }
 
      else if (code === 'AR'){
       callCountryMap('argentinaMap', 'argentina', code);
-      // countryMap.map = 'ar_mill';
-      // countryName = 'Argentina';
-      // callCountryMap(countryMap, countryName);
-     }
 
-     // else if (code === 'IT'){
-     //  hideWorldMap():
-     //  $('#france-map').vectorMap(franceMap);
-     //  countryMap.map = 'it_regions_mill';
-     //  countryName = 'Italy';
-     //  callCountryMap(countryMap, countryName);
-     // }
+     }
 
      else if (code === 'ZA'){
       callCountryMap('southAfricaMap', 'south-africa', code);
@@ -277,6 +242,7 @@ $(function(){
        $('#spain-map').toggleClass('hide', true);
        $('#italy-map').toggleClass('hide', true);
        $('#us-map').toggleClass('hide', true);
+       $('#south-africa-map').toggleClass('hide', true);       
        $('#world-map').vectorMap('set', 'focus', {
           scale: 1,
           x: 0,
