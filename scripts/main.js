@@ -59,11 +59,12 @@ $(function(){
           'FR-F': '#9932CC',
           'FR-B': 'indigo',
           'FR-D': '#9400D3',
-          'FR-V': '#9932CC'
+          'FR-V': '#9932CC',
+          'FR-A': '#DA70D6'
         },
-      attribute: 'fill'
-    }]
-  }
+        attribute: 'fill'
+      }]
+    }
   }
 
 
@@ -83,6 +84,15 @@ $(function(){
         "fill-opacity": 0.8,
         cursor: 'pointer'
       }
+    },
+    series: {
+      regions: [{
+        values: {
+          'ES-BU': '#9932CC',
+          'ES-LO': 'indigo',
+        },
+        attribute: 'fill'
+      }]
     }
   }
 
@@ -103,6 +113,15 @@ $(function(){
         "fill-opacity": 0.8,
         cursor: 'pointer'
       }
+    },
+    series: {
+      regions: [{
+        values: {
+          'AR-M': '#9932CC',
+          'AR-A': 'indigo',
+        },
+        attribute: 'fill'
+      }]
     }
   }
 
@@ -123,22 +142,57 @@ $(function(){
         "fill-opacity": 0.8,
         cursor: 'pointer'
       }
+    },
+    series: {
+      regions: [{
+        values: {
+          'US-CA': 'indigo',
+          'US-WA': '#9932CC',
+          'US-NY': '#9932CC',
+          'US-OR': '#9400D3'
+        }
+      }]
     }
   }
 
+  var southAfricaMap = {
+    map: 'za_mill',
+    backgroundColor: 'transparent',
+    zoomOnScroll: false,
+    regionStyle: {
+      initial: {
+        fill: 'white',
+        "fill-opacity": 1,
+        stroke: 'none',
+        "stroke-width": 0,
+        "stroke-opacity": 1
+      },
+      hover: {
+        "fill-opacity": 0.8,
+        cursor: 'pointer'
+      }
+    },
+    series: {
+      regions: [{
+        values: {
+          'ZA-WC': 'indigo'
+        }
+      }]
+    }
+  }
 
   worldMap.series = {
     regions: [{
       values: {
-        'AU': '#9932CC',
+        // 'AU': '#9932CC',
         'FR': 'indigo',
         'ZA': '#9932CC',
         'US': '#9932CC',
         'AR': '#9932CC',
-        'ES': 'purple',
-        'IT': 'purple',
-        'PT': '#9400D3',
-        'DE': '#9400D3'
+        'ES': 'purple'
+        // 'IT': 'purple',
+        // 'PT': '#9400D3',
+        // 'DE': '#9400D3'
       },
     attribute: 'fill'
     }]
@@ -148,12 +202,16 @@ $(function(){
   franceMap.onRegionClick = handleSubRegionClick;
   argentinaMap.onRegionClick = handleSubRegionClick;
   spainMap.onRegionClick = handleSubRegionClick;
+  usMap.onRegionClick = handleSubRegionClick;
+  southAfricaMap.onRegionClick = handleSubRegionClick;
+
 
   $('#world-map').vectorMap(worldMap);
   $('#france-map').vectorMap(franceMap);
   $('#us-map').vectorMap(usMap);  
   $('#spain-map').vectorMap(spainMap);
   $('#argentina-map').vectorMap(argentinaMap);
+  $('#south-africa-map').vectorMap(southAfricaMap);
 
   //reset map focus to the origin of 0,0
   $('button').click(reset);
@@ -200,13 +258,9 @@ $(function(){
      //  callCountryMap(countryMap, countryName);
      // }
 
-     // else if (code === 'ZA'){
-     //  hideWorldMap():
-     //  $('#france-map').vectorMap(franceMap);
-     //  countryMap.map = 'za_mill';
-     //  countryName = 'South Africa';
-     //  callCountryMap(countryMap, countryName);
-     // }
+     else if (code === 'ZA'){
+      callCountryMap('southAfricaMap', 'south-africa', code);
+     }
 
      else {
       focusOnClickedCountry(code);
@@ -298,6 +352,10 @@ $(function(){
       $('.ui.modal.burgundy').modal('show');   
     }
 
+    else if (code === "FR-A"){
+      $('.ui.modal.alsace').modal('show');   
+    }
+
     else if (code === "AR-M"){
        $('.ui.modal.mendoza').modal('show');       
     }
@@ -312,6 +370,22 @@ $(function(){
 
     else if (code === "ES-LO"){
       $('.ui.modal.rioja').modal('show');       
+    }
+
+    else if (code === "US-CA"){
+      $('.ui.modal.california').modal('show');       
+    }
+
+    else if (code === "US-WA"){
+      $('.ui.modal.washington').modal('show');       
+    }
+
+    else if (code === "US-NY"){
+      $('.ui.modal.newYork').modal('show');       
+    }
+
+    else if (code === "ZA-WC"){
+      $('.ui.modal.westernCape').modal('show');       
     }
 
     else {
