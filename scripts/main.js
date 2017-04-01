@@ -90,6 +90,8 @@ $(function(){
         values: {
           'ES-BU': '#9932CC',
           'ES-LO': 'indigo',
+          'ES-T': '#9932CC',
+          'ES-PO': '#9932CC'
         },
         attribute: 'fill'
       }]
@@ -371,6 +373,15 @@ $(function(){
     else if (code === "ES-LO"){
       $('.ui.modal.rioja').modal('show');       
     }
+
+    else if (code === "ES-T"){
+      $('.ui.modal.catalunya').modal('show');       
+    }
+
+    else if (code === "ES-PO"){
+      $('.ui.modal.galicia').modal('show');       
+    }
+   
 
     else if (code === "US-CA"){
       $('.ui.modal.california').modal('show');       
