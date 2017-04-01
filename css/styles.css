@@ -139,7 +139,7 @@ button {
 }
 
 .hide {
-  display: none;
+  visibility: hidden;
 }
 
 .image img {
@@ -150,4 +150,13 @@ button {
 
 .pop-up p {
   padding: 5em;
+}
+
+.maps {
+  position: relative;
+}
+.map {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

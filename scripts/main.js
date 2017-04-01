@@ -209,6 +209,7 @@ $(function(){
      //This will be the code that either calls up the regional map if it's available, or zoom into a country
      if (code === 'FR'){
       callCountryMap('franceMap', 'france', code);
+
      }
 
      else if (code === 'US'){
@@ -270,24 +271,9 @@ $(function(){
   }
 
   function callCountryMap(countryMap, countryName, code){
-    // $('.header').html(countryName);
-    focusOnClickedCountry(code);
     countryMap = '#'+countryName+'-map';
     $(countryMap).toggleClass('hide');
     hideWorldMap();
-    $(countryMap).vectorMap('set', 'focus', {
-     /**
-      * The region property takes a string that represents the region. It can
-      * be written in manually, but we are choosing to make it dynamic using a 
-      * variable.
-      */
-     region: code,
-     animate: true
-  });
-    // $('#modalMap').html('');
-
-    // $('#modalMap').updateSize();
-    // $('.ui.modal').modal('show');
   }
 
   function focusOnClickedCountry(code) {
