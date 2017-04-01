@@ -155,6 +155,7 @@ button {
 .maps {
   position: relative;
 }
+
 .map {
   position: absolute;
   top: 0;
