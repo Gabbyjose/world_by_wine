@@ -14,7 +14,7 @@
 
 <!-- nav just in case I need it for other parts of the site -->
       <nav>
-        <a class="nav-item" href="#">By Region</a>
+        <a class="nav-item" href="test.html">By Region</a>
         <a class="nav-item" href="#">By Grape</a>
         <a class="nav-item" href="#">Fermentation</a>
       </nav>
@@ -29,11 +29,15 @@
 
 <!-- this is the map -->
       <div id="world-map"></div>
+      <div id="france-map" class="hide"></div>
+      <div id="spain-map" class="hide"></div>
+      <div id="us-map" class="hide"></div>
+      <div id="argentina-map" class="hide"></div>
     </div>
 
 
 <!--  my modals -->
-    <div class="ui modal pop-up">
+<!--     <div class="ui modal pop-up">
       <i class="close icon"></i>
       <div class="header">
       </div>
@@ -41,12 +45,85 @@
 
         <div class="description pop-up">
           <div id="modalMap"></div>
-<!--         this information needs to be variable and pull from the declared objects -->
-          <!-- <p>Regions: franceWineInfo.regions</p>
-          <p>Grapes: franceWineInfo.grapes</p> -->
+<!         this information needs to be variable and pull from the declared objects -->
+<!--           <img>
+          <p>Grapes: </p>
         </div>
       </div>
 
+    </div> -->
+
+<!-- these are my modals  -->
+    <div class="ui modal pop-up loire">
+     <i class="close icon"></i>
+      <div class="header">Loire Valley</div>
+      <div class="image content"><img src="css/loire-valley.jpg"></div>
+      <div class="description pop-up">
+        <p>This valley is known for its earthy and light Cabernet Francs.</p>
+      </div>
+    </div>
+
+    <div class="ui modal pop-up bordeaux">
+     <i class="close icon"></i>
+      <div class="header">Bordeaux</div>
+      <div class="image content"><img src="css/bordeaux-river.jpg"></div>
+      <div class="description pop-up">
+        <p>A French classic, who hasn't had a Bordeaux? Made up of primarily Cabernet Sauvnignon, these wines are blends.</p>
+      </div>
+    </div>
+
+    <div class="ui modal pop-up rhone">
+     <i class="close icon"></i>
+      <div class="header">Rhone Valley</div>
+      <div class="image content"><img src="css/hermitage-rhone.jpg"></div>
+      <div class="description pop-up">
+        <p>Hermitage hermitage hermitage!</p>
+      </div>
+    </div>
+
+    <div class="ui modal pop-up burgundy">
+     <i class="close icon"></i>
+      <div class="header">Burgundy</div>
+      <div class="image content"><img src="css/burgundy.jpg"></div>
+      <div class="description pop-up">
+        <p>This is the home of Pinot Noirs.</p>
+      </div>
+    </div>
+
+    <div class="ui modal pop-up mendoza">
+     <i class="close icon"></i>
+      <div class="header">Mendoza</div>
+      <div class="image content"><img src="css/mendoza_vineyard.jpg"></div>
+      <div class="description pop-up">
+        <p>People come here for malbecs but you can also find cabernet sauvignons, pinot noirs, cabernet francs.</p>
+      </div>
+    </div>
+
+    <div class="ui modal pop-up salta">
+     <i class="close icon"></i>
+      <div class="header">Salta</div>
+      <div class="image content"><img src="css/salta.jpg"></div>
+      <div class="description pop-up">
+        <p>People come here for malbecs but you can also find cabernet sauvignons, pinot noirs, cabernet francs.</p>
+      </div>
+    </div>
+
+    <div class="ui modal pop-up ribera">
+     <i class="close icon"></i>
+      <div class="header">Ribera Del Duero</div>
+      <div class="image content"><img src="css/ribera-del-duero.jpg"></div>
+      <div class="description pop-up">
+        <p>Just your typical tempranillo grape but with years of oak aging that leaves you with a remarkable, smokey finish.</p>
+      </div>
+    </div>
+
+    <div class="ui modal pop-up rioja">
+     <i class="close icon"></i>
+      <div class="header">Rioja</div>
+      <div class="image content"><img src="css/rioja.jpg"></div>
+      <div class="description pop-up">
+        <p>Tempranillo, Granache, oh my! Spanish grapes are abundant and unique here.</p>
+      </div>
     </div>
 
 

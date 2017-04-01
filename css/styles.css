@@ -68,11 +68,51 @@ a:hover {
 
 #world-map {
   align-content: center;
+  height: 90vh;
+  width: 80vw;
+  margin: 0em 5em 5em 5em;
+  border: 1px #333 solid;
+  border-radius: 25px;
+}
+
+#france-map {
+  align-content: center;
   height: 80vh;
   width: 80vw;
   margin: 0em 5em 5em 5em;
   border: 1px #333 solid;
   border-radius: 25px;
+  
+}
+
+#spain-map {
+  align-content: center;
+  height: 80vh;
+  width: 80vw;
+  margin: 0em 5em 5em 5em;
+  border: 1px #333 solid;
+  border-radius: 25px;
+  
+}
+
+#argentina-map {
+  align-content: center;
+  height: 80vh;
+  width: 80vw;
+  margin: 0em 5em 5em 5em;
+  border: 1px #333 solid;
+  border-radius: 25px;
+  
+}
+
+#us-map {
+  align-content: center;
+  height: 80vh;
+  width: 80vw;
+  margin: 0em 5em 5em 5em;
+  border: 1px #333 solid;
+  border-radius: 25px;
+  
 }
 
 button {
@@ -88,9 +128,18 @@ button {
 
 .pop-up {
   width: 80%;
-  height: 80vh;
 }
 
-#modalMap .jvectormap-container {
-  height: 80vh;
+.hide {
+  display: none;
+}
+
+.image img {
+  width: 90%;
+  height: 90%;
+  background-size: cover;
+}
+
+.pop-up p {
+  padding: 5em;
 }
