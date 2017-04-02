@@ -23,14 +23,14 @@ div h1 {
   font-family: cursive, sans-serif;
   font-size: 42px;
   color: #EEE;
-  margin: 5px 0px;
+  margin: 8px 0px;
   text-align: center;
   font-weight: bolder;
-  padding-top: 100px;
+  padding-top: 30px;
 }
 
 body {
-  background-image: url("mendoza.jpg");
+  background-image: url("oak-barrels-2.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -142,14 +142,14 @@ button {
   visibility: hidden;
 }
 
-.image img {
-  width: 90%;
-  height: 90%;
-  background-size: cover;
+.image {
+  width: 70vw;
+  height: 50vh;
+  justify-content: center;
 }
 
 .pop-up p {
-  padding: 5em;
+  padding: 3em;
 }
 
 .maps {
