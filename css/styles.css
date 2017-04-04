@@ -25,6 +25,18 @@ div h1 {
 }
 
 body {
+
+}
+
+.background {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-filter: brightness(.5);
+  filter: brightness(.5);  
+  z-index: 0;
   background-image: url("oak-barrels-2.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -61,7 +73,7 @@ a:hover {
   align-content: center;
 }
 
-#world-map {
+/*#world-map {
   align-content: center;
   height: 90vh;
   width: 80vw;
@@ -116,7 +128,7 @@ a:hover {
   margin: 0em 5em 5em 5em;
   border: 1px #333 solid;
   border-radius: 25px;
-}
+}*/
 
 button {
 /*  width: 10%;*/
@@ -126,8 +138,9 @@ button {
 
 }
 
-button .button .ui {
-  margin-bottom: 3em;
+.ui.button {
+  margin-bottom: 1em;
+  padding-bottom: 1.5em;
 
 }
 
@@ -157,17 +170,32 @@ img {
   position: absolute;
   top: 0;
   left: 0;
+  align-content: center;
+  height: 80vh;
+  width: 80vw;
+  margin: 0em 5em 5em 5em;
+  border: 1px #333 solid;
+  border-radius: 25px;
+}
+
+.modal {
+  overflow-y: auto;
 }
 
 .column-one-fourth {
   width: 25%;
   text-decoration: bold;
   float: left;
-  padding: 1em;
+  padding: 1em 1em 1em 2em;
 }
 
 .column-three-fourths {
   width: 75%;
   float: right;
-  padding: 1em;
+  padding: 1em 1.5em 1em 1em;
+}
+
+.brightness {
+    -webkit-filter: brightness(.5);
+    filter: brightness(.5);
 }
