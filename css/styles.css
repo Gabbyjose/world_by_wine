@@ -24,10 +24,6 @@ div h1 {
   padding-top: 30px;
 }
 
-body {
-
-}
-
 .background {
   height: 100vh;
   width: 100vw;
@@ -50,6 +46,8 @@ body {
   padding: 3%;
   display: flex;
   flex-direction: column;
+  z-index: 1;
+  position: relative;
 }
 
 a {
@@ -73,80 +71,14 @@ a:hover {
   align-content: center;
 }
 
-/*#world-map {
-  align-content: center;
-  height: 90vh;
-  width: 80vw;
-  margin: 0em 5em 5em 5em;
-  border: 1px #333 solid;
-  border-radius: 25px;
-}
-
-#france-map {
-  align-content: center;
-  height: 80vh;
-  width: 80vw;
-  margin: 0em 5em 5em 5em;
-  border: 1px #333 solid;
-  border-radius: 25px;
-  
-}
-
-#spain-map {
-  align-content: center;
-  height: 80vh;
-  width: 80vw;
-  margin: 0em 5em 5em 5em;
-  border: 1px #333 solid;
-  border-radius: 25px;
-  
-}
-
-#argentina-map {
-  align-content: center;
-  height: 80vh;
-  width: 80vw;
-  margin: 0em 5em 5em 5em;
-  border: 1px #333 solid;
-  border-radius: 25px;
-  
-}
-
-#us-map {
-  align-content: center;
-  height: 90vh;
-  width: 80vw;
-  margin: 0em 5em 5em 5em;
-  border: 1px #333 solid;
-  border-radius: 25px;  
-}
-
-#south-africa-map {
-  align-content: center;
-  height: 80vh;
-  width: 80vw;
-  margin: 0em 5em 5em 5em;
-  border: 1px #333 solid;
-  border-radius: 25px;
-}*/
-
-button {
-/*  width: 10%;*/
-  align-self: center;
-/*  text-align: center;*/
-/*  padding-bottom: 2em;*/
-
-}
-
 .ui.button {
   margin-bottom: 1em;
   padding-bottom: 1.5em;
-
+  align-self: center;
 }
 
 .pop-up {
-  width: 80%;
-  padding: 3em;
+  padding: 2em;
 }
 
 .hide {
@@ -192,10 +124,10 @@ img {
 .column-three-fourths {
   width: 75%;
   float: right;
-  padding: 1em 1.5em 1em 1em;
+  padding: 1em 1em 1em 2em;
 }
 
-.brightness {
-    -webkit-filter: brightness(.5);
-    filter: brightness(.5);
+.row {
+  width: 100%;
+  overflow: auto;
 }
