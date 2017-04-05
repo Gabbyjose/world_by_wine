@@ -135,7 +135,6 @@ $(function(){
       regions: [{
         values: {
           'US-CA': 'indigo',
-          'US-WA': '#9932CC',
           'US-NY': '#9932CC',
           'US-OR': '#9400D3'
         }
@@ -339,8 +338,8 @@ $(function(){
       $('.ui.modal.california').modal('show');       
     }
 
-    else if (code === "US-WA"){
-      $('.ui.modal.washington').modal('show');       
+    else if (code === "US-OR"){
+      $('.ui.modal.oregon').modal('show');       
     }
 
     else if (code === "US-NY"){
