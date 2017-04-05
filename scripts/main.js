@@ -264,7 +264,6 @@ $(function(){
   
 
   function hideWorldMap(){
-    console.log('testing this hide feature');
     $('#world-map').toggleClass('hide');
 
   }
@@ -286,6 +285,9 @@ $(function(){
      animate: true
   });
   }
+
+  $('.ui.secondary.menu .item').tab();
+
 
   function handleSubRegionClick(event, code){
     console.log(event, code);

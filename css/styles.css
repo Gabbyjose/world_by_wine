@@ -45,7 +45,7 @@ div h1 {
 .welcome {
   height: 700px;
   width: 100%;
-  padding: 3%;
+  padding: 1%;
   display: flex;
   flex-direction: column;
   z-index: 1;
@@ -68,8 +68,6 @@ a:hover {
 
 .welcome p {
   color: #fff;
-  margin: 3em;
-  padding: 1em;
   align-content: center;
 }
 
@@ -133,3 +131,17 @@ img {
   width: 100%;
   overflow: auto;
 }
+
+.ui.tab.segment {
+  background-color: transparent;
+  margin-left: 1em;
+}
+
+.ui.secondary.menu .item {
+  color: #EEE;
+}
+
+.ui.secondary.menu .item.active {
+  color: purple;
+}
+
