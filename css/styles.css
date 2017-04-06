@@ -1,23 +1,5 @@
-nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;  
-  position: relative;
-  z-index: 2;
-}
-
-.nav-item {
-  text-align: center;
-  font-family: cursive, sans-serif;
-  padding: 5px;
-  margin: 10px;
-  text-decoration: none;
-  width: 200px;
-}
-
-
 div h1 {
-  font-family: cursive, sans-serif;
+  font-family: cursive, serif;
   font-size: 42px;
   color: #EEE;
   margin: 8px 0px;
@@ -91,7 +73,7 @@ a:hover {
 }
 
 img {
-  height: 70vh;
+  height: 50vh;
 }
 
 .maps {
@@ -134,7 +116,11 @@ img {
 
 .ui.tab.segment {
   background-color: transparent;
-  margin-left: 1em;
+  margin: 0em 2em 0em 2em;
+}
+
+.ui.secondary.menu {
+  margin: 0em 2em 0em 2em;
 }
 
 .ui.secondary.menu .item {
@@ -142,6 +128,6 @@ img {
 }
 
 .ui.secondary.menu .item.active {
-  color: purple;
+  color: #A9A9A9;
 }
 
