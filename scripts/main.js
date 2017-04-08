@@ -42,11 +42,11 @@ $(function(){
     series: {
       regions: [{
         values: {
-          'FR-F': '#9932CC',
-          'FR-B': 'indigo',
-          'FR-D': '#9400D3',
-          'FR-V': '#9932CC',
-          'FR-A': '#DA70D6'
+          'FR-F': '#9400D3',
+          'FR-B': '#4B0082',
+          'FR-D': '#800080',
+          'FR-V': '#8B008B',
+          'FR-A': '#9932CC'
         },
         attribute: 'fill'
       }]
@@ -74,9 +74,9 @@ $(function(){
     series: {
       regions: [{
         values: {
-          'ES-BU': '#9932CC',
-          'ES-LO': 'indigo',
-          'ES-T': '#9932CC',
+          'ES-BU': '#800080',
+          'ES-LO': '#4B0082',
+          'ES-T': '#8B008B',
           'ES-PO': '#9932CC'
         },
         attribute: 'fill'
@@ -171,15 +171,11 @@ $(function(){
   worldMap.series = {
     regions: [{
       values: {
-        // 'AU': '#9932CC',
-        'FR': 'indigo',
-        'ZA': '#9932CC',
-        'US': '#9932CC',
+        'FR': '#800080',
+        'ZA': '#8B008B',
+        'US': '#9400D3',
         'AR': '#9932CC',
-        'ES': 'purple'
-        // 'IT': 'purple',
-        // 'PT': '#9400D3',
-        // 'DE': '#9400D3'
+        'ES': '#4B0082'
       },
     attribute: 'fill'
     }]
@@ -290,7 +286,6 @@ $(function(){
 
 
   function handleSubRegionClick(event, code){
-    console.log(event, code);
     if (code === "FR-F"){
       $('.ui.modal.loire').modal('show');   
     }
@@ -335,7 +330,6 @@ $(function(){
       $('.ui.modal.galicia').modal('show');       
     }
    
-
     else if (code === "US-CA"){
       $('.ui.modal.california').modal('show');       
     }
