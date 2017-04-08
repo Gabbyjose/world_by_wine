@@ -105,8 +105,8 @@ $(function(){
     series: {
       regions: [{
         values: {
-          'AR-M': '#9932CC',
-          'AR-A': 'indigo',
+          'AR-M': '#indigo',
+          'AR-A': '#9932CC',
         },
         attribute: 'fill'
       }]
