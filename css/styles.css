@@ -2,10 +2,10 @@ div h1 {
   font-family: cursive, serif;
   font-size: 42px;
   color: #EEE;
-  margin: 8px 0px;
+  margin: 2px 0px;
   text-align: center;
   font-weight: bolder;
-  padding-top: 30px;
+  padding-top: .5em;
 }
 
 .background {
