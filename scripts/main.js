@@ -390,8 +390,8 @@ $(function(){
           {latLng: [-27.733333, 32.05], name: 'Elgin'},
           {latLng: [50.3334, 7.1637], name: 'Ahr'},
           {latLng: [46.7341, 11.2888], name: 'South Tyrol'},
-          {latLng: [-37.4713, -144.7852], name: 'Victoria'},
-          {latLng: [45.9432, -24.9668], name: 'Romania'}
+          {latLng: [-37.4713, 144.7852], name: 'Victoria'},
+          {latLng: [45.9432, 24.9668], name: 'Romania'}
       ]
     }
 
@@ -413,7 +413,7 @@ $(function(){
           {latLng: [38.5025, -122.2654], name: 'Napa Valley'},
           {latLng: [43.7711, 11.2486], name: 'Tuscany'},
           {latLng: [-32.8895, -68.8458], name: 'Mendoza'},
-          {latLng: [37.1108, -137.1108], name: 'Santa Cruz'}
+          {latLng: [37.1108, -121.1108], name: 'Santa Cruz'}
           // {latLng: [-45.2828, 169.6568], name: 'Central Otago'},
           // {latLng: [-33.3190, -71.4076], name: 'Casablanca Valley'},
           // {latLng: [-27.733333, 32.05], name: 'Elgin'},
