@@ -198,7 +198,7 @@ $(function(){
   $('#south-africa-map').vectorMap(southAfricaMap);
 
   //reset map focus to the origin of 0,0
-  $('button').click(reset);
+  $('.reset').click(reset);
 
    function handleRegionClick(event, code) {
      //This will be the code that either calls up the regional map if it's available, or zoom into a country
@@ -261,7 +261,6 @@ $(function(){
 
   function hideWorldMap(){
     $('#world-map').toggleClass('hide');
-
   }
 
   function callCountryMap(countryMap, countryName, code){
@@ -352,5 +351,97 @@ $(function(){
   }
 
 
+    var worldMarkerMap = {
+      map: 'world_mill',
+      backgroundColor: 'transparent',
+      scaleColors: ['#C8EEFF', '#0071A4'],
+      normalizeFunction: 'polynomial',
+      hoverOpacity: 0.7,
+      hoverColor: false,
+      markerStyle: {
+        initial: {
+          fill: 'purple',
+          stroke: '#383f47'
+        }
+      }
+    }
+
+    var pinotNoirMap = {
+      map: 'world_mill',
+      backgroundColor: 'transparent',
+      scaleColors: ['#C8EEFF', '#0071A4'],
+      normalizeFunction: 'polynomial',
+      hoverOpacity: 0.7,
+      hoverColor: false,
+      markerStyle: {
+        initial: {
+          fill: 'purple',
+          stroke: '#383f47'
+        }
+      },
+      markers: [
+          {latLng: [47.0525, 4.3837], name: 'Burgundy'},
+          {latLng: [38.5025, -122.2654], name: 'Napa Valley'},
+          {latLng: [44.9426, -122.9338], name: 'Willamette Valley'},
+          {latLng: [-32.8895, -68.8458], name: 'Mendoza'},
+          {latLng: [-41.5038, 173.9672], name: 'Marlborough'},
+          {latLng: [-45.2828, 169.6568], name: 'Central Otago'},
+          {latLng: [-33.3190, -71.4076], name: 'Casablanca Valley'},
+          {latLng: [-27.733333, 32.05], name: 'Elgin'},
+          {latLng: [50.3334, 7.1637], name: 'Ahr'},
+          {latLng: [46.7341, 11.2888], name: 'South Tyrol'},
+          {latLng: [-37.4713, -144.7852], name: 'Victoria'},
+          {latLng: [45.9432, -24.9668], name: 'Romania'}
+      ]
+    }
+
+    var cabSauvMap = {
+      map: 'world_mill',
+      backgroundColor: 'transparent',
+      scaleColors: ['#C8EEFF', '#0071A4'],
+      normalizeFunction: 'polynomial',
+      hoverOpacity: 0.7,
+      hoverColor: false,
+      markerStyle: {
+        initial: {
+          fill: 'purple',
+          stroke: '#383f47'
+        }
+      },
+      markers: [
+          {latLng: [44.8378, -.5792], name: 'Bordeaux'},
+          {latLng: [38.5025, -122.2654], name: 'Napa Valley'},
+          {latLng: [43.7711, 11.2486], name: 'Tuscany'},
+          {latLng: [-32.8895, -68.8458], name: 'Mendoza'},
+          {latLng: [37.1108, -137.1108], name: 'Santa Cruz'}
+          // {latLng: [-45.2828, 169.6568], name: 'Central Otago'},
+          // {latLng: [-33.3190, -71.4076], name: 'Casablanca Valley'},
+          // {latLng: [-27.733333, 32.05], name: 'Elgin'},
+          // {latLng: [50.3334, 7.1637], name: 'Ahr'},
+          // {latLng: [46.7341, 11.2888], name: 'South Tyrol'},
+          // {latLng: [-37.4713, -144.7852], name: 'Victoria'},
+          // {latLng: [45.9432, -24.9668], name: 'Romania'}
+      ]
+    }
+
+  $('#world-map-markers').vectorMap(worldMarkerMap);
+  $('#pinot-noir').vectorMap(pinotNoirMap);
+  $('#cab-sauv').vectorMap(cabSauvMap);
+
+
+  $('.ui.button.Pinot').click(addPinotMap);
+  $('.ui.button.Cabernet').click(addCabSauvMap);
+
+  function addPinotMap(){
+    $('#cab-sauv').toggleClass('hide', true);  
+    $('#pinot-noir').toggleClass('hide');  
+  }
+
+  function addCabSauvMap(){
+    $('#pinot-noir').toggleClass('hide', true);  
+    $('#cab-sauv').toggleClass('hide');  
+  }
+
+  
 
 });
