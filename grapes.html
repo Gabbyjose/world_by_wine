@@ -20,14 +20,25 @@
 
    <div class="welcome">
 
-     <button class= "ui button Pinot">Pinot</button>
+     <h1>Gabby's World by Wine</h1>
 
-     <button class= "ui button Cabernet">Cab Sauv</button>    
+     <div class="ui dropdown">
+       <input type="hidden" name="grape">
+       <i class="dropdown icon"></i>
+       <div class="default text">Grape Type</div>
+       <div class="menu">
+         <div class="item" data-value="pinot-noir">Pinot Noir</div>
+         <div class="item" data-value="cab-sauv">Cabernet Sauvignon</div>
+         <div class="item" data-value="chardonnay">Chardonnay</div>
+       </div>
+     </div>
+
 
      <div class="maps">    
        <div id="world-map-markers" class="map"></div>
         <div id="pinot-noir" class="hide map"></div>
         <div id="cab-sauv" class="hide map"></div>
+        <div id="chardonnay" class="hide map"></div>
      </div>
   </div>
 
