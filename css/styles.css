@@ -1,4 +1,4 @@
-div h1 {
+h1 {
   font-family: cursive, serif;
   font-size: 42px;
   color: #EEE;
@@ -48,6 +48,12 @@ a:hover {
 .welcome p {
   color: #fff;
   align-content: center;
+  padding-top: 10px;
+}
+
+p {
+  color: #fff;
+  align-content: center;  
 }
 
 .ui.button {
@@ -140,4 +146,10 @@ nav {
   color: #EEE;
   padding: 0px 0px 10px 20px;
 }
-
+/*
+.body-copy {
+  width: 80vw;
+  align-self: center;
+  margin: 0 auto;
+  padding-top: 10px;
+}*/
