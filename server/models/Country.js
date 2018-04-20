@@ -1,7 +1,7 @@
 const db = require("../db.js");
 const Sequelize = require("sequelize");
 
-const Countries = db.define("country", {
+const Country = db.define("country", {
   name: {
     type: Sequelize.STRING,
     allowNull: false
@@ -12,4 +12,4 @@ const Countries = db.define("country", {
   }
 });
 
-module.exports = Countries;
+module.exports = Country;

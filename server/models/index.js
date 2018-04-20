@@ -1,11 +1,11 @@
 const Grapes = require("./Grapes.js");
-const Regions = require("./Regions.js");
-const Countries = require("./Countries.js");
+const Region = require("./Region.js");
+const Country = require("./Country.js");
 
-Regions.belongTo(Countries);
-Countries.hasMany(Regions);
+Region.belongsTo(Country);
+Country.hasMany(Region);
 
-Grapes.belongsToMany(Regions);
-Regions.hasMany(Grapes);
+Grapes.belongsToMany(Region, { through: "GrapeRegions" });
+Region.hasMany(Grapes);
 
-module.exports = { Grapes, Regions, Countries };
+module.exports = { Grapes, Region, Country };

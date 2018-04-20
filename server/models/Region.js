@@ -1,13 +1,13 @@
 const db = require("../db.js");
 const Sequelize = require("Sequelize");
 
-const Regions = db.define("region", {
+const Region = db.define("region", {
   name: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  descripstion: {
-    type: Sequelize.STRING,
+  description: {
+    type: Sequelize.TEXT,
     allowNull: false
   },
   fameGrape: {
@@ -30,4 +30,4 @@ const Regions = db.define("region", {
   }
 });
 
-module.exports = Regions;
+module.exports = Region;
