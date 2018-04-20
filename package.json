@@ -1,0 +1,28 @@
+{
+  "name": "world_by_wine",
+  "version": "1.0.0",
+  "description": "[THIS IS IT](https://gabbyjose.github.io/world_by_wine/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabbyjose/world_by_wine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabbyjose/world_by_wine/issues"
+  },
+  "homepage": "https://github.com/Gabbyjose/world_by_wine#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "sequelize": "^4.37.6",
+    "webpack": "^4.6.0"
+  }
+}
