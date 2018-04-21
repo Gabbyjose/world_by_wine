@@ -4,7 +4,8 @@ const db = require("./db.js");
 async function seed() {
   await db.sync({ force: true });
   console.log("db synced!");
-  const countries = await Promise.all([
+  let countries;
+  await Promise.all([
     Country.create({
       name: "France",
       mapName: "fr_region_mill"
@@ -25,9 +26,9 @@ async function seed() {
       name: "South Africa",
       mapName: "za_mill"
     })
-  ]);
+  ]).then(createdCountries => (countries = createdCountries));
 
-  const region = await Promise.all([
+  const regions = await Promise.all([
     Region.create({
       name: "Burgundy",
       description:
@@ -37,7 +38,8 @@ async function seed() {
       quote:
         "New World Pinot Noirs have nothing on the OG Burgundy, especially those old vine Burgundy's.",
       imageURL: "../public/css/burgundy.jpg",
-      value: "FR-B"
+      value: "FR-B",
+      countryId: 1
     }),
     Region.create({
       name: "Loire Valley",
@@ -48,7 +50,8 @@ async function seed() {
       quote:
         "New World Pinot Noirs have nothing on the OG Burgundy, especially those old vine Burgundy's.",
       imageURL: "../public/css/loire-valley.jpg",
-      value: "FR-F"
+      value: "FR-F",
+      countryId: 1
     }),
     Region.create({
       name: "Rhone Valley",
@@ -60,7 +63,8 @@ async function seed() {
       quote:
         "I can't wait to have the opportunity to try another Hermitage, because we all know that's some of the rarest of the Rhone wines.",
       imageURL: "../public/css/hermitage-rhone.jpg",
-      value: "FR-V"
+      value: "FR-V",
+      countryId: 1
     }),
     Region.create({
       name: "Alsace",
@@ -71,7 +75,8 @@ async function seed() {
       quote:
         "Unlike the German Reisling, the Reisling here in Alsace are nice and dry.",
       imageURL: "../public/css/alsace.jpg",
-      value: "FR-A"
+      value: "FR-A",
+      countryId: 1
     }),
     Region.create({
       name: "Bordeaux",
@@ -82,7 +87,8 @@ async function seed() {
       quote:
         "I prefer a well aged Bordeaux over a Napa Cab any day because I love the oak flavor.",
       imageURL: "../public/css/bordeaux-river.jpg",
-      value: "FR-D"
+      value: "FR-D",
+      countryId: 1
     }),
     Region.create({
       name: "Ribera del Duero",
@@ -94,7 +100,8 @@ async function seed() {
       quote:
         "I feel like the Tempranillo grape really shines through in Ribera del Duero.",
       imageURL: "../public/css/ribera-del-duero.jpg",
-      value: "ES-BU"
+      value: "ES-BU",
+      countryId: 3
     }),
     Region.create({
       name: "Rioja",
@@ -106,7 +113,8 @@ async function seed() {
       quote:
         "What I love about Rioja is that you can find a great value bottle, like you would never find in France.",
       imageURL: "../public/css/rioja.jpg",
-      value: "ES-LO"
+      value: "ES-LO",
+      countryId: 3
     }),
     Region.create({
       name: "Galicia",
@@ -118,7 +126,8 @@ async function seed() {
       quote:
         "I find that Galician wines have more in common with Portugese wines rather than other Spanish wines, given their proximity to Portugal.",
       imageURL: "../public/css/galicia.jpg",
-      value: "ES-PO"
+      value: "ES-PO",
+      countryId: 3
     }),
     Region.create({
       name: "Catalunya",
@@ -130,7 +139,8 @@ async function seed() {
       quote:
         "Wines from Priorat have really become popular recently, it's good to see a new kind of Spanish wine.",
       imageURL: "../public/css/catalunya.jpg",
-      value: "ES-T"
+      value: "ES-T",
+      countryId: 3
     }),
     Region.create({
       name: "The Western Cape",
@@ -141,7 +151,8 @@ async function seed() {
       quote:
         "I'd love to do a trip to Cape Town, especially to visit those beautiful Western Cape wineries.",
       imageURL: "../public/css/western-cape.jpg",
-      value: "ZA-WC"
+      value: "ZA-WC",
+      countryId: 5
     }),
     Region.create({
       name: "Mendoza",
@@ -153,7 +164,8 @@ async function seed() {
       quote:
         "Remember back before the Malbec boom, when no one knew about Argentinian wine? What a new world gem!",
       imageURL: "../public/css/mendoza_vineyard.jpg",
-      value: "AR-M"
+      value: "AR-M",
+      countryId: 2
     }),
     Region.create({
       name: "Salta",
@@ -164,7 +176,8 @@ async function seed() {
       quote:
         "As much as I like Mendoza, I have to admit that the Malbecs from Salta bring those berry notes to a whole new level.",
       imageURL: "../public/css/salta.jpg",
-      value: "AR-A"
+      value: "AR-A",
+      countryId: 2
     }),
     Region.create({
       name: "California",
@@ -175,7 +188,8 @@ async function seed() {
       quote:
         "I hear people say that California wine is more sought after than French wine, isn't that crazy?",
       imageURL: "../public/css/napa-valley.jpg",
-      value: "US-CA"
+      value: "US-CA",
+      countryId: 4
     }),
     Region.create({
       name: "Oregon",
@@ -186,7 +200,8 @@ async function seed() {
       quote:
         "I don't know what all the fuss is about in California, when the real Pinot Noirs are in Willamette.",
       imageURL: "../public/css/WillametteValley.jpg",
-      value: "US-OR"
+      value: "US-OR",
+      countryId: 4
     }),
     Region.create({
       name: "New York",
@@ -197,7 +212,8 @@ async function seed() {
       quote:
         "I was going to just spend another weekend in the Hamptons but then I found this winery, I haven't had a Cabernet Franc like this in the U.S. before.",
       imageURL: "../public/css/finger-lakes.jpg",
-      value: "US-NY"
+      value: "US-NY",
+      countryId: 4
     })
   ]);
 
@@ -207,8 +223,19 @@ async function seed() {
     }),
     Grapes.create({
       name: "Cabernet Sauvignon"
+    }),
+    Grapes.create({
+      name: "Merlot"
+    }),
+    Grapes.create({
+      name: "Malbec"
+    }),
+    Grapes.create({
+      name: "Syrah"
     })
   ]);
+
+  console.log(countries, grapes);
 
   console.log("seeded succesfully");
 }
