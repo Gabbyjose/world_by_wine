@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node server/seed.js"
+    "seed": "node server/seed.js",
+    "start": "node server",
+    "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
+    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,7 @@
     "babel": "^6.23.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
+    "path": "^0.12.7",
     "pg": "^7.4.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
