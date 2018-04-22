@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const db = require("./db");
 const path = require("path");
+module.exports = app;
 
 const createApp = () => {
   app.use(bodyParser.json());
@@ -10,7 +11,7 @@ const createApp = () => {
 
   app.use("/api", require("./routes"));
 
-  app.use(express.static(path.join(__dirname, "..", "public")));
+  app.use(express.static(path.join(__dirname, "../", "public")));
 
   app.use((req, res, next) => {
     if (path.extname(req.path).length) {
