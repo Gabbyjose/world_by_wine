@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import { WineMap, GrapeSearch, Home } from "./components";
+import { Switch, Route } from "react-router-dom";
 
 class Routes extends Component {
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   render() {
-    <Switch>
-      <Link to="/" component={Home} />
-      <Link to="/map" component={WineMap} />
-      <Link to="/grapes" component={GrapeSearch} />
-    </Switch>;
+    return (
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/map" component={WineMap} />
+        <Route path="/grapes" component={GrapeSearch} />
+      </Switch>
+    );
   }
 }
 
