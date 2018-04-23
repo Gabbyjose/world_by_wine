@@ -1,11 +1,14 @@
 import Navbar from "./Navbar.jsx";
 import Routes from "./Routes.jsx";
+import React from "react";
 
-export default (App = () => {
+const App = () => {
   return (
     <div>
       <Navbar />
       <Routes />
     </div>
   );
-});
+};
+
+module.exports = App;
