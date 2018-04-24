@@ -57,9 +57,9 @@ p {
   padding: 2em;
 }
 
-.hide {
+/* .hide {
   visibility: hidden;
-}
+} */
 
 .image {
   width: 100%;
@@ -68,10 +68,6 @@ p {
 
 img {
   height: 50vh;
-}
-
-.maps {
-  position: relative;
 }
 
 .map {
@@ -136,10 +132,21 @@ nav {
   color: #eee;
   padding: 0px 0px 10px 20px;
 }
-/*
-.body-copy {
-  width: 80vw;
-  align-self: center;
-  margin: 0 auto;
-  padding-top: 10px;
-}*/
+
+.ui.modal>.close {
+  color: black;
+  top: 1.5em;
+  right: 1.5em;
+
+}
+
+.ui.modal {
+  display: block;
+  position: absolute;
+  top: 10px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}

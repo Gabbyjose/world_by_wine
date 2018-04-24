@@ -180,11 +180,14 @@ class WineMap extends Component {
           }]
         },
         onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
-      }
+      },
+      localRange: ''
 
     };
     this.handleClick = this.handleClick.bind(this);
-    this.handleRegionClick = this.handleRegionClick.bind(this)
+    this.handleRegionClick = this.handleRegionClick.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.resetClick = this.resetClick.bind(this)
   }
 
   componentWillMount() {
@@ -198,20 +201,71 @@ class WineMap extends Component {
   }
 
   handleRegionClick(event, code) {
+    const localRegion = this.props.regions.find(el => el.value === code);
+    this.setState({ localRegion });
 
-    const region = this.props.regions.find(el => el.value === code)
-    console.log(region)
   }
 
   handleClick(event, code) {
     const newMap = this.state[code];
+    const tooltips = document.getElementsByClassName('jvectormap-tip');
+    Array.prototype.forEach.call(tooltips, el => el.parentNode.removeChild(el));
+
     const map = document.getElementById("world-map")
+    const oldMap = document.getElementsByClassName('jvectormap-container');
+    oldMap[0].parentNode.removeChild(oldMap[0]);
     $(map).vectorMap(newMap);
   }
 
+  handleCloseClick() {
+    this.setState({ localRegion: '' })
+  }
+
+  resetClick() {
+    const map = document.getElementById("world-map")
+    const oldMap = document.getElementsByClassName('jvectormap-container');
+    if (oldMap[0]) oldMap[0].parentNode.removeChild(oldMap[0]);
+    $(map).vectorMap(this.state.worldMap);
+  }
+
   render() {
-    console.log(this.props)
-    return (<div id="world-map" className="map" />)
+    const region = this.state.localRegion;
+    return (
+      <div className="flex">
+        <button onClick={this.resetClick} className="ui button">Reset</button>
+        <div id="world-map" className="map" />
+        {!!region &&
+          (<div className="ui modal pop-up">
+            <i className="close icon" onClick={this.handleCloseClick} />
+            <div className="header">{region.name}</div>
+            <div className="image content">
+              <img className="image" src="css/loire-valley.jpg" />
+            </div>
+            <div className="description">
+              <div className="row">
+                <div className="column-one-fourth">Grape of Fame:</div>
+                <div className="column-three-fourths">{region.fameGrape}</div>
+              </div>
+              <div className="row">
+                <div className="column-one-fourth">Other Grapes:</div>
+                <div className="column-three-fourths">{region.grapes}</div>
+              </div>
+              <div className="row">
+                <div className="column-one-fourth">Primary Flavors:</div>
+                <div className="column-three-fourths">{region.flavors}</div>
+              </div>
+              <div className="row">
+                <div className="column-one-fourth">Fun Facts:</div>
+                <div className="column-three-fourths">{region.description}</div>
+                <div className="row">
+                  <div className="column-one-fourth">Things to Say:</div>
+                  <div className="column-three-fourths">{region.quote}</div>
+                </div>
+              </div>
+            </div>
+          </div>)}
+      </div>
+    )
   }
 }
 

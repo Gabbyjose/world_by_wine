@@ -519,10 +519,13 @@ function (_Component) {
         onRegionClick: function onRegionClick(event, code) {
           return _this.handleRegionClick(event, code, _this.props);
         }
-      }
+      },
+      localRange: ''
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleRegionClick = _this.handleRegionClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleCloseClick = _this.handleCloseClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.resetClick = _this.resetClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -541,26 +544,98 @@ function (_Component) {
   }, {
     key: "handleRegionClick",
     value: function handleRegionClick(event, code) {
-      var region = this.props.regions.find(function (el) {
+      var localRegion = this.props.regions.find(function (el) {
         return el.value === code;
       });
-      console.log(region);
+      this.setState({
+        localRegion: localRegion
+      });
     }
   }, {
     key: "handleClick",
     value: function handleClick(event, code) {
       var newMap = this.state[code];
+      var tooltips = document.getElementsByClassName('jvectormap-tip');
+      Array.prototype.forEach.call(tooltips, function (el) {
+        return el.parentNode.removeChild(el);
+      });
       var map = document.getElementById("world-map");
+      var oldMap = document.getElementsByClassName('jvectormap-container');
+      oldMap[0].parentNode.removeChild(oldMap[0]);
       $(map).vectorMap(newMap);
+    }
+  }, {
+    key: "handleCloseClick",
+    value: function handleCloseClick() {
+      this.setState({
+        localRegion: ''
+      });
+    }
+  }, {
+    key: "resetClick",
+    value: function resetClick() {
+      var map = document.getElementById("world-map");
+      var oldMap = document.getElementsByClassName('jvectormap-container');
+      if (oldMap[0]) oldMap[0].parentNode.removeChild(oldMap[0]);
+      $(map).vectorMap(this.state.worldMap);
     }
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props);
+      var region = this.state.localRegion;
       return _react.default.createElement("div", {
+        className: "flex"
+      }, _react.default.createElement("button", {
+        onClick: this.resetClick,
+        className: "ui button"
+      }, "Reset"), _react.default.createElement("div", {
         id: "world-map",
         className: "map"
-      });
+      }), !!region && _react.default.createElement("div", {
+        className: "ui modal pop-up"
+      }, _react.default.createElement("i", {
+        className: "close icon",
+        onClick: this.handleCloseClick
+      }), _react.default.createElement("div", {
+        className: "header"
+      }, region.name), _react.default.createElement("div", {
+        className: "image content"
+      }, _react.default.createElement("img", {
+        className: "image",
+        src: "css/loire-valley.jpg"
+      })), _react.default.createElement("div", {
+        className: "description"
+      }, _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Grape of Fame:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.fameGrape)), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Other Grapes:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.grapes)), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Primary Flavors:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.flavors)), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Fun Facts:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.description), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Things to Say:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.quote))))));
     }
   }]);
 
