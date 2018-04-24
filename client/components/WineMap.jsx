@@ -187,12 +187,14 @@ class WineMap extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleRegionClick = this.handleRegionClick.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
-    this.resetClick = this.resetClick.bind(this)
+    this.resetClick = this.resetClick.bind(this);
+    //this.createMaps = this.createMaps.bind(this)
   }
 
   componentWillMount() {
-    this.props.getCountries();
     this.props.getRegions();
+    this.props.getCountries();
+    // this.createMaps(this.props.countries);
   }
 
   componentDidMount() {
@@ -200,21 +202,58 @@ class WineMap extends Component {
     $(map).vectorMap(this.state.worldMap);
   }
 
+  // createMaps(mapArray) {
+  //   console.log('do we get here')
+  //   const newMapArray = mapArray.forEach(map => {
+  //     let regions = this.props.regions.filter(region => region.countryId === map.id)
+  //     console.log(regions)
+  //     return {
+  //       map: map.mapName,
+  //       backgroundColor: "transparent",
+  //       zoomOnScroll: false,
+  //       regionStyle: {
+  //         initial: {
+  //           fill: "white",
+  //           "fill-opacity": 1,
+  //           stroke: "none",
+  //           "stroke-width": 0,
+  //           "stroke-opacity": 1
+  //         },
+  //         hover: {
+  //           "fill-opacity": 0.8,
+  //           cursor: "pointer"
+  //         }
+  //       },
+  //       series: {
+  //         regions: [{
+  //           values: {
+  //             'FR': '#800080',
+  //             'ZA': '#8B008B',
+  //             'US': '#9400D3',
+  //             'AR': '#9932CC',
+  //             'ES': '#4B0082'
+  //           },
+  //           attribute: 'fill'
+  //         }]
+  //       }
+  //     }
+  //   });
+  //   console.log(newMapArray)
+  // }
+
   handleRegionClick(event, code) {
     const localRegion = this.props.regions.find(el => el.value === code);
     this.setState({ localRegion });
-
   }
 
   handleClick(event, code) {
-    const newMap = this.state[code];
     const tooltips = document.getElementsByClassName('jvectormap-tip');
     Array.prototype.forEach.call(tooltips, el => el.parentNode.removeChild(el));
 
     const map = document.getElementById("world-map")
     const oldMap = document.getElementsByClassName('jvectormap-container');
     oldMap[0].parentNode.removeChild(oldMap[0]);
-    $(map).vectorMap(newMap);
+    $(map).vectorMap(this.state[code]);
   }
 
   handleCloseClick() {
@@ -222,6 +261,8 @@ class WineMap extends Component {
   }
 
   resetClick() {
+    const tooltips = document.getElementsByClassName('jvectormap-tip');
+    Array.prototype.forEach.call(tooltips, el => el.parentNode.removeChild(el));
     const map = document.getElementById("world-map")
     const oldMap = document.getElementsByClassName('jvectormap-container');
     if (oldMap[0]) oldMap[0].parentNode.removeChild(oldMap[0]);

@@ -127,27 +127,7 @@ var Navbar = function Navbar() {
     to: "/grapes"
   }, "Grape Search")), _react.default.createElement("div", {
     className: "welcome"
-  }, _react.default.createElement("h1", null, "Gabby's World by Wine"), _react.default.createElement("div", {
-    className: "ui secondary menu"
-  }, _react.default.createElement("a", {
-    className: "item active",
-    "data-tab": "first"
-  }, "Welcome"), _react.default.createElement("a", {
-    className: "item",
-    "data-tab": "second"
-  }, "Region"), _react.default.createElement("a", {
-    className: "item",
-    "data-tab": "third"
-  }, "Grape")), _react.default.createElement("div", {
-    className: "ui tab segment active",
-    "data-tab": "first"
-  }, _react.default.createElement("p", null, "Welcome to Gabby's world by wine! A bottle of wine doesn't have to be expensive to be enjoyed. You can buy a wine you like at a good price if you know two things: the kinds of grapes you like, and the regions you like. We will explore both. I want you to know that you, too, can talk snobbishly about wine and enjoy it too."), _react.default.createElement("p", null, "Start exploring wines today. Click on any highlighted map below to begin exploring a country's wine regions, what grapes they use, and what kind of wines they produce.")), _react.default.createElement("div", {
-    className: "ui tab segment",
-    "data-tab": "second"
-  }, _react.default.createElement("p", null, "Regions are the name of the game when it comes to Old World wines. When people talk about Old World wines, they are talking about mainly European wines, and wine makers that have been in the industry as long as we can remember. New World wines, on the other hand, refer to wines from the Americas, Australia, Africa, and other new players to the wine game. When it comes to branding, the main difference between Old and New World wines are how they're marketed. Old World wines are marketed by the region in which they're grown. Meanwhile, New World wines are sold by grape.")), _react.default.createElement("div", {
-    className: "ui tab segment",
-    "data-tab": "third"
-  }, _react.default.createElement("p", null, "When people drink wine, they think about the grapes. This hasn't always been the way we think about wine. In fact, it was only until the 'New World' wines rose in popularity that consumers knew what grapes they were drinking. Now, consumers have come to expect to know what they're drinking, which forced Old World producers to include this information on their bottles. While Old World wines are still sold by region, you can find the grape information on the back of the label or online. Many Old World regions have laws that regulate the types of grape you can use in a wine, so once you understand what regions use what grapes, you can make a more informed purchase."))));
+  }, _react.default.createElement("h1", null, "Gabby's World by Wine")));
 };
 
 var _default = Navbar;
@@ -525,22 +505,61 @@ function (_Component) {
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleRegionClick = _this.handleRegionClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleCloseClick = _this.handleCloseClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.resetClick = _this.resetClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.resetClick = _this.resetClick.bind(_assertThisInitialized(_assertThisInitialized(_this))); //this.createMaps = this.createMaps.bind(this)
+
     return _this;
   }
 
   _createClass(WineMap, [{
     key: "componentWillMount",
     value: function componentWillMount() {
-      this.props.getCountries();
       this.props.getRegions();
+      this.props.getCountries(); // this.createMaps(this.props.countries);
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var map = document.getElementById("world-map");
       $(map).vectorMap(this.state.worldMap);
-    }
+    } // createMaps(mapArray) {
+    //   console.log('do we get here')
+    //   const newMapArray = mapArray.forEach(map => {
+    //     let regions = this.props.regions.filter(region => region.countryId === map.id)
+    //     console.log(regions)
+    //     return {
+    //       map: map.mapName,
+    //       backgroundColor: "transparent",
+    //       zoomOnScroll: false,
+    //       regionStyle: {
+    //         initial: {
+    //           fill: "white",
+    //           "fill-opacity": 1,
+    //           stroke: "none",
+    //           "stroke-width": 0,
+    //           "stroke-opacity": 1
+    //         },
+    //         hover: {
+    //           "fill-opacity": 0.8,
+    //           cursor: "pointer"
+    //         }
+    //       },
+    //       series: {
+    //         regions: [{
+    //           values: {
+    //             'FR': '#800080',
+    //             'ZA': '#8B008B',
+    //             'US': '#9400D3',
+    //             'AR': '#9932CC',
+    //             'ES': '#4B0082'
+    //           },
+    //           attribute: 'fill'
+    //         }]
+    //       }
+    //     }
+    //   });
+    //   console.log(newMapArray)
+    // }
+
   }, {
     key: "handleRegionClick",
     value: function handleRegionClick(event, code) {
@@ -554,7 +573,6 @@ function (_Component) {
   }, {
     key: "handleClick",
     value: function handleClick(event, code) {
-      var newMap = this.state[code];
       var tooltips = document.getElementsByClassName('jvectormap-tip');
       Array.prototype.forEach.call(tooltips, function (el) {
         return el.parentNode.removeChild(el);
@@ -562,7 +580,7 @@ function (_Component) {
       var map = document.getElementById("world-map");
       var oldMap = document.getElementsByClassName('jvectormap-container');
       oldMap[0].parentNode.removeChild(oldMap[0]);
-      $(map).vectorMap(newMap);
+      $(map).vectorMap(this.state[code]);
     }
   }, {
     key: "handleCloseClick",
@@ -574,6 +592,10 @@ function (_Component) {
   }, {
     key: "resetClick",
     value: function resetClick() {
+      var tooltips = document.getElementsByClassName('jvectormap-tip');
+      Array.prototype.forEach.call(tooltips, function (el) {
+        return el.parentNode.removeChild(el);
+      });
       var map = document.getElementById("world-map");
       var oldMap = document.getElementsByClassName('jvectormap-container');
       if (oldMap[0]) oldMap[0].parentNode.removeChild(oldMap[0]);
