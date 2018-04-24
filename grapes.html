@@ -1,61 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title></title>
 
-    <link rel="stylesheet" href="css/jquery-jvectormap.css" type="text/css" media="screen">
-    <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
+<head>
+  <title></title>
 
-    <div class="background"></div>
+  <link rel="stylesheet" href="css/jquery-jvectormap.css" type="text/css" media="screen">
+  <link rel="stylesheet" type="text/css" href="./semantic/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="grapes.html">Grape Search</a>
-      <a href="read-wine-label.html">Read a Wine Label</a>
-      <a href="DOC.html">DOC For Dummies</a>
-    </nav>
+<body>
 
-   <div class="welcome">
+  <div class="background"></div>
 
-     <h1>Gabby's World by Wine</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="grapes.html">Grape Search</a>
+    <a href="read-wine-label.html">Read a Wine Label</a>
+    <a href="DOC.html">DOC For Dummies</a>
+  </nav>
 
-     <div class="ui dropdown">
-       <input type="hidden" name="grape">
-       <i class="dropdown icon"></i>
-       <div class="default text">Grape Type</div>
-       <div class="menu">
-         <div class="item" data-value="pinot-noir">Pinot Noir</div>
-         <div class="item" data-value="cab-sauv">Cabernet Sauvignon</div>
-         <div class="item" data-value="chardonnay">Chardonnay</div>
-       </div>
-     </div>
+  <div class="welcome">
+
+    <h1>Gabby's World by Wine</h1>
+
+    <div class="ui dropdown">
+      <input type="hidden" name="grape">
+      <i class="dropdown icon"></i>
+      <div class="default text">Grape Type</div>
+      <div class="menu">
+        <div class="item" data-value="pinot-noir">Pinot Noir</div>
+        <div class="item" data-value="cab-sauv">Cabernet Sauvignon</div>
+        <div class="item" data-value="chardonnay">Chardonnay</div>
+      </div>
+    </div>
 
 
-     <div class="maps">    
-       <div id="world-map-markers" class="map"></div>
-        <div id="pinot-noir" class="hide map"></div>
-        <div id="cab-sauv" class="hide map"></div>
-        <div id="chardonnay" class="hide map"></div>
-     </div>
+    <div class="maps">
+      <div id="world-map-markers" class="map"></div>
+      <div id="pinot-noir" class="hide map"></div>
+      <div id="cab-sauv" class="hide map"></div>
+      <div id="chardonnay" class="hide map"></div>
+    </div>
   </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="scripts/jquery-jvectormap.js"></script>
-    <script src="scripts/jquery-jvectormap-2.0.3.min.js"></script>
-    <script src="scripts/jquery-jvectormap-world-mill.js"></script>
-    <script src="scripts/jquery-jvectormap-fr_regions-mill.js"></script>
-    <script src="scripts/jquery-jvectormap-es-mill.js"></script>
-    <script src="scripts/jquery-jvectormap-ar-mill.js"></script>
-    <script src="scripts/jquery-jvectormap-us-aea.js"></script>
-    <script src="scripts/jquery-jvectormap-it_regions-mill.js"></script>
-    <script src="scripts/jquery-jvectormap-za-mill.js"></script>
-    <script src="Semantic-UI-CSS-master/semantic.min.js"></script>
-    <script src="scripts/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="scripts/jquery-jvectormap.js"></script>
+  <script src="scripts/jquery-jvectormap-2.0.3.min.js"></script>
+  <script src="scripts/jquery-jvectormap-world-mill.js"></script>
+  <script src="scripts/jquery-jvectormap-fr_regions-mill.js"></script>
+  <script src="scripts/jquery-jvectormap-es-mill.js"></script>
+  <script src="scripts/jquery-jvectormap-ar-mill.js"></script>
+  <script src="scripts/jquery-jvectormap-us-aea.js"></script>
+  <script src="scripts/jquery-jvectormap-it_regions-mill.js"></script>
+  <script src="scripts/jquery-jvectormap-za-mill.js"></script>
+  <script src="./semantic/semantic.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>

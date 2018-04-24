@@ -1,11 +1,16 @@
 import Navbar from "./Navbar.jsx";
 import Routes from "./Routes.jsx";
+import WineMap from "./components/WineMap.jsx"
+import React from "react";
 
-export default (App = () => {
+const App = () => {
   return (
     <div>
       <Navbar />
+      <WineMap />
       <Routes />
     </div>
   );
-});
+};
+
+module.exports = App;
