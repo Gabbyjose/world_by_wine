@@ -1,5 +1,5 @@
-const { Grapes, Region, Country } = require("./models");
-const db = require("./db.js");
+const { Grapes, Region, Country } = require("./db/models");
+const db = require("./db/db.js");
 
 async function seed() {
   await db.sync({ force: true });
@@ -8,23 +8,28 @@ async function seed() {
   await Promise.all([
     Country.create({
       name: "France",
-      mapName: "fr_region_mill"
+      mapName: "fr_region_mill",
+      code: 'FR'
     }),
     Country.create({
       name: "Argentina",
-      mapName: "ar_mill"
+      mapName: "ar_mill",
+      code: 'AR'
     }),
     Country.create({
       name: "Spain",
-      mapName: "es_mill"
+      mapName: "es_mill",
+      code: "ES"
     }),
     Country.create({
       name: "United States",
-      mapName: "us_aea"
+      mapName: "us_aea",
+      code: 'US'
     }),
     Country.create({
       name: "South Africa",
-      mapName: "za_mill"
+      mapName: "za_mill",
+      code: 'ZA'
     })
   ]).then(createdCountries => (countries = createdCountries));
 

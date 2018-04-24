@@ -9,6 +9,9 @@ const Country = db.define("country", {
   mapName: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  code: {
+    type: Sequelize.STRING
   }
 });
 

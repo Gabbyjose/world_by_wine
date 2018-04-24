@@ -85,12 +85,14 @@ var _Navbar = _interopRequireDefault(__webpack_require__(/*! ./Navbar.jsx */ "./
 
 var _Routes = _interopRequireDefault(__webpack_require__(/*! ./Routes.jsx */ "./client/Routes.jsx"));
 
+var _WineMap = _interopRequireDefault(__webpack_require__(/*! ./components/WineMap.jsx */ "./client/components/WineMap.jsx"));
+
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-  return _react.default.createElement("div", null, _react.default.createElement(_Navbar.default, null), _react.default.createElement(_Routes.default, null));
+  return _react.default.createElement("div", null, _react.default.createElement(_Navbar.default, null), _react.default.createElement(_WineMap.default, null), _react.default.createElement(_Routes.default, null));
 };
 
 module.exports = App;
@@ -297,6 +299,10 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var _store = __webpack_require__(/*! ../store */ "./client/store/index.js");
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -307,27 +313,254 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.getPrototypeOf || function _getPrototypeOf(o) { return o.__proto__; }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+// const reactJvectormap = require("react-jvectormap")
 var WineMap =
 /*#__PURE__*/
 function (_Component) {
-  function WineMap() {
+  function WineMap(props) {
+    var _this;
+
     _classCallCheck(this, WineMap);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(WineMap).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WineMap).call(this, props));
+    _this.state = {
+      worldMap: {
+        map: "world_mill",
+        backgroundColor: "transparent",
+        zoomOnScroll: false,
+        regionStyle: {
+          initial: {
+            fill: "white",
+            "fill-opacity": 1,
+            stroke: "none",
+            "stroke-width": 0,
+            "stroke-opacity": 1
+          },
+          hover: {
+            "fill-opacity": 0.8,
+            cursor: "pointer"
+          },
+          regions: [{
+            values: {
+              'FR': '#800080',
+              'ZA': '#8B008B',
+              'US': '#9400D3',
+              'AR': '#9932CC',
+              'ES': '#4B0082'
+            },
+            attribute: 'fill'
+          }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleClick(event, code, _this.props);
+        }
+      },
+      FR: {
+        map: 'fr_regions_mill',
+        backgroundColor: 'transparent',
+        zoomOnScroll: false,
+        regionStyle: {
+          initial: {
+            fill: 'white',
+            "fill-opacity": 1,
+            stroke: 'none',
+            "stroke-width": 0,
+            "stroke-opacity": 1
+          },
+          hover: {
+            "fill-opacity": 0.8,
+            cursor: 'pointer'
+          }
+        },
+        series: {
+          regions: [{
+            values: {
+              'FR-F': '#9400D3',
+              'FR-B': '#4B0082',
+              'FR-D': '#800080',
+              'FR-V': '#8B008B',
+              'FR-A': '#9932CC'
+            },
+            attribute: 'fill'
+          }]
+        }
+      },
+      ES: {
+        map: 'es_mill',
+        backgroundColor: 'transparent',
+        zoomOnScroll: false,
+        regionStyle: {
+          initial: {
+            fill: 'white',
+            "fill-opacity": 1,
+            stroke: 'none',
+            "stroke-width": 0,
+            "stroke-opacity": 1
+          },
+          hover: {
+            "fill-opacity": 0.8,
+            cursor: 'pointer'
+          }
+        },
+        series: {
+          regions: [{
+            values: {
+              'ES-BU': '#800080',
+              'ES-LO': '#4B0082',
+              'ES-T': '#8B008B',
+              'ES-PO': '#9932CC'
+            },
+            attribute: 'fill'
+          }]
+        }
+      },
+      AR: {
+        map: 'ar_mill',
+        backgroundColor: 'transparent',
+        zoomOnScroll: false,
+        regionStyle: {
+          initial: {
+            fill: 'white',
+            "fill-opacity": 1,
+            stroke: 'none',
+            "stroke-width": 0,
+            "stroke-opacity": 1
+          },
+          hover: {
+            "fill-opacity": 0.8,
+            cursor: 'pointer'
+          }
+        },
+        series: {
+          regions: [{
+            values: {
+              'AR-M': '#4B0082',
+              'AR-A': '#9932CC'
+            },
+            attribute: 'fill'
+          }]
+        }
+      },
+      US: {
+        map: 'us_aea',
+        backgroundColor: 'transparent',
+        zoomOnScroll: false,
+        regionStyle: {
+          initial: {
+            fill: 'white',
+            "fill-opacity": 1,
+            stroke: 'none',
+            "stroke-width": 0,
+            "stroke-opacity": 1
+          },
+          hover: {
+            "fill-opacity": 0.8,
+            cursor: 'pointer'
+          }
+        },
+        series: {
+          regions: [{
+            values: {
+              'US-CA': 'indigo',
+              'US-NY': '#9932CC',
+              'US-OR': '#9400D3'
+            }
+          }]
+        }
+      },
+      ZA: {
+        map: 'za_mill',
+        backgroundColor: 'transparent',
+        zoomOnScroll: false,
+        regionStyle: {
+          initial: {
+            fill: 'white',
+            "fill-opacity": 1,
+            stroke: 'none',
+            "stroke-width": 0,
+            "stroke-opacity": 1
+          },
+          hover: {
+            "fill-opacity": 0.8,
+            cursor: 'pointer'
+          }
+        },
+        series: {
+          regions: [{
+            values: {
+              'ZA-WC': 'indigo'
+            }
+          }]
+        }
+      }
+    };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
+
+  _createClass(WineMap, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.props.getCountries();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var map = document.getElementById("world-map");
+      $(map).vectorMap(this.state.worldMap);
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(event, code) {
+      var newMap = this.props.countries.find(function (el) {
+        return el.code === code;
+      });
+      var map = document.getElementById("world-map");
+      $(map).vectorMap(newMap.mapName);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", {
+        id: "world-map",
+        className: "map"
+      });
+    }
+  }]);
 
   _inherits(WineMap, _Component);
 
   return WineMap;
 }(_react.Component);
 
-exports.default = WineMap;
+var mapState = function mapState(_ref) {
+  var countries = _ref.countries;
+  return {
+    countries: countries
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    getCountries: function getCountries() {
+      dispatch((0, _store.fetchCountries)());
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapState, mapDispatch)(WineMap);
+
+exports.default = _default;
 
 /***/ }),
 
@@ -414,11 +647,15 @@ var getCountries = function getCountries(countries) {
 };
 
 var fetchCountries = function fetchCountries() {
-  _axios.default.get("/api/countries").then(function (res) {
-    return dispatch(getCountries(res.data));
-  }).catch(function (err) {
-    return console.error(err);
-  });
+  return function (dispatch) {
+    {
+      _axios.default.get("/api/countries").then(function (res) {
+        return dispatch(getCountries(res.data));
+      }).catch(function (err) {
+        return console.error(err);
+      });
+    }
+  };
 };
 
 exports.fetchCountries = fetchCountries;
@@ -451,6 +688,7 @@ function _default() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var _exportNames = {};
 exports.default = void 0;
 
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
@@ -462,6 +700,17 @@ var _reduxThunk = _interopRequireDefault(__webpack_require__(/*! redux-thunk */ 
 var _reduxDevtoolsExtension = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 
 var _countries = _interopRequireDefault(__webpack_require__(/*! ./countries */ "./client/store/countries.js"));
+
+Object.keys(_countries).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _countries[key];
+    }
+  });
+});
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
