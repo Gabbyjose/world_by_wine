@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchCountries } from '../store';
+import { fetchCountries, fetchRegions } from '../store';
 import { connect } from 'react-redux';
 // const reactJvectormap = require("react-jvectormap")
 
@@ -22,7 +22,9 @@ class WineMap extends Component {
           hover: {
             "fill-opacity": 0.8,
             cursor: "pointer"
-          },
+          }
+        },
+        series: {
           regions: [{
             values: {
               'FR': '#800080',
@@ -64,7 +66,8 @@ class WineMap extends Component {
             },
             attribute: 'fill'
           }]
-        }
+        },
+        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
       },
       ES: {
         map: 'es_mill',
@@ -93,7 +96,8 @@ class WineMap extends Component {
             },
             attribute: 'fill'
           }]
-        }
+        },
+        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
       },
       AR: {
         map: 'ar_mill',
@@ -120,7 +124,8 @@ class WineMap extends Component {
             },
             attribute: 'fill'
           }]
-        }
+        },
+        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
       },
       US: {
         map: 'us_aea',
@@ -147,7 +152,8 @@ class WineMap extends Component {
               'US-OR': '#9400D3'
             }
           }]
-        }
+        },
+        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
       },
       ZA: {
         map: 'za_mill',
@@ -172,15 +178,18 @@ class WineMap extends Component {
               'ZA-WC': 'indigo'
             }
           }]
-        }
+        },
+        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
       }
 
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleRegionClick = this.handleRegionClick.bind(this)
   }
 
   componentWillMount() {
     this.props.getCountries();
+    this.props.getRegions();
   }
 
   componentDidMount() {
@@ -188,22 +197,32 @@ class WineMap extends Component {
     $(map).vectorMap(this.state.worldMap);
   }
 
+  handleRegionClick(event, code) {
+
+    const region = this.props.regions.find(el => el.value === code)
+    console.log(region)
+  }
+
   handleClick(event, code) {
-    const newMap = this.props.countries.find(el => el.code === code);
+    const newMap = this.state[code];
     const map = document.getElementById("world-map")
-    $(map).vectorMap(newMap.mapName);
+    $(map).vectorMap(newMap);
   }
 
   render() {
+    console.log(this.props)
     return (<div id="world-map" className="map" />)
   }
 }
 
-const mapState = ({ countries }) => ({ countries });
+const mapState = ({ countries, regions }) => ({ countries, regions });
 
 const mapDispatch = (dispatch) => ({
   getCountries: () => {
     dispatch(fetchCountries());
+  },
+  getRegions: () => {
+    dispatch(fetchRegions())
   }
 });
 

@@ -349,7 +349,9 @@ function (_Component) {
           hover: {
             "fill-opacity": 0.8,
             cursor: "pointer"
-          },
+          }
+        },
+        series: {
           regions: [{
             values: {
               'FR': '#800080',
@@ -393,6 +395,9 @@ function (_Component) {
             },
             attribute: 'fill'
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
       },
       ES: {
@@ -422,6 +427,9 @@ function (_Component) {
             },
             attribute: 'fill'
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
       },
       AR: {
@@ -449,6 +457,9 @@ function (_Component) {
             },
             attribute: 'fill'
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
       },
       US: {
@@ -476,6 +487,9 @@ function (_Component) {
               'US-OR': '#9400D3'
             }
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
       },
       ZA: {
@@ -501,10 +515,14 @@ function (_Component) {
               'ZA-WC': 'indigo'
             }
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
       }
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleRegionClick = _this.handleRegionClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -512,6 +530,7 @@ function (_Component) {
     key: "componentWillMount",
     value: function componentWillMount() {
       this.props.getCountries();
+      this.props.getRegions();
     }
   }, {
     key: "componentDidMount",
@@ -520,17 +539,24 @@ function (_Component) {
       $(map).vectorMap(this.state.worldMap);
     }
   }, {
+    key: "handleRegionClick",
+    value: function handleRegionClick(event, code) {
+      var region = this.props.regions.find(function (el) {
+        return el.value === code;
+      });
+      console.log(region);
+    }
+  }, {
     key: "handleClick",
     value: function handleClick(event, code) {
-      var newMap = this.props.countries.find(function (el) {
-        return el.code === code;
-      });
+      var newMap = this.state[code];
       var map = document.getElementById("world-map");
-      $(map).vectorMap(newMap.mapName);
+      $(map).vectorMap(newMap);
     }
   }, {
     key: "render",
     value: function render() {
+      console.log(this.props);
       return _react.default.createElement("div", {
         id: "world-map",
         className: "map"
@@ -544,9 +570,11 @@ function (_Component) {
 }(_react.Component);
 
 var mapState = function mapState(_ref) {
-  var countries = _ref.countries;
+  var countries = _ref.countries,
+      regions = _ref.regions;
   return {
-    countries: countries
+    countries: countries,
+    regions: regions
   };
 };
 
@@ -554,6 +582,9 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     getCountries: function getCountries() {
       dispatch((0, _store.fetchCountries)());
+    },
+    getRegions: function getRegions() {
+      dispatch((0, _store.fetchRegions)());
     }
   };
 };
@@ -712,10 +743,24 @@ Object.keys(_countries).forEach(function (key) {
   });
 });
 
+var _regions = _interopRequireDefault(__webpack_require__(/*! ./regions */ "./client/store/regions.js"));
+
+Object.keys(_regions).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _regions[key];
+    }
+  });
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducer = (0, _redux.combineReducers)({
-  countries: _countries.default
+  countries: _countries.default,
+  regions: _regions.default
 });
 var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk.default, (0, _reduxLogger.createLogger)({
   collapsed: true
@@ -723,6 +768,62 @@ var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.app
 var store = (0, _redux.createStore)(reducer, middleware);
 var _default = store;
 exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/store/regions.js":
+/*!*********************************!*\
+  !*** ./client/store/regions.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+exports.fetchRegions = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GET_REGIONS = 'GET_REGIONS';
+
+var getRegions = function getRegions(regions) {
+  return {
+    type: GET_REGIONS,
+    regions: regions
+  };
+};
+
+var fetchRegions = function fetchRegions() {
+  return function (dispatch) {
+    _axios.default.get('/api/regions').then(function (res) {
+      return dispatch(getRegions(res.data));
+    }).catch(function (err) {
+      return console.error(err);
+    });
+  };
+};
+
+exports.fetchRegions = fetchRegions;
+
+function _default() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case GET_REGIONS:
+      return action.regions;
+
+    default:
+      return state;
+  }
+}
 
 /***/ }),
 
