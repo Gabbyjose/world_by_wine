@@ -1,11 +1,10 @@
 h1 {
   font-family: cursive, serif;
-  font-size: 42px;
+  font-size: 36px;
   color: #eee;
-  margin: 2px 0px;
+  margin: 1px 0px;
   text-align: center;
   font-weight: bolder;
-  padding-top: 0.5em;
 }
 
 body {
@@ -18,7 +17,7 @@ body {
 
 .welcome {
   width: 100%;
-  padding: 1%;
+  padding: .5em;
   display: flex;
   flex-direction: column;
   z-index: 0;
@@ -39,7 +38,7 @@ a:hover {
 .welcome p {
   color: #fff;
   align-content: center;
-  padding-top: 10px;
+  padding-top: 1em;
 }
 
 p {
@@ -48,18 +47,18 @@ p {
 }
 
 .ui.button {
-  margin-bottom: 1em;
+  margin-bottom: .5em;
   padding: 0.5em;
   align-self: center;
 }
 
 .pop-up {
-  padding: 2em;
+  padding: 1em;
 }
 
-.hide {
+/* .hide {
   visibility: hidden;
-}
+} */
 
 .image {
   width: 100%;
@@ -68,10 +67,6 @@ p {
 
 img {
   height: 50vh;
-}
-
-.maps {
-  position: relative;
 }
 
 .map {
@@ -127,7 +122,7 @@ img {
 nav {
   position: relative;
   z-index: 2;
-  padding: 1em;
+  padding: .5em;
   display: flex;
   justify-content: space-around;
 }
@@ -136,10 +131,22 @@ nav {
   color: #eee;
   padding: 0px 0px 10px 20px;
 }
-/*
-.body-copy {
-  width: 80vw;
-  align-self: center;
-  margin: 0 auto;
-  padding-top: 10px;
-}*/
+
+.ui.modal>.close {
+  color: black;
+  top: 1.5em;
+  right: 1.5em;
+
+}
+
+.ui.modal {
+  display: block;
+  position: absolute;
+  top: 10px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -127,27 +127,7 @@ var Navbar = function Navbar() {
     to: "/grapes"
   }, "Grape Search")), _react.default.createElement("div", {
     className: "welcome"
-  }, _react.default.createElement("h1", null, "Gabby's World by Wine"), _react.default.createElement("div", {
-    className: "ui secondary menu"
-  }, _react.default.createElement("a", {
-    className: "item active",
-    "data-tab": "first"
-  }, "Welcome"), _react.default.createElement("a", {
-    className: "item",
-    "data-tab": "second"
-  }, "Region"), _react.default.createElement("a", {
-    className: "item",
-    "data-tab": "third"
-  }, "Grape")), _react.default.createElement("div", {
-    className: "ui tab segment active",
-    "data-tab": "first"
-  }, _react.default.createElement("p", null, "Welcome to Gabby's world by wine! A bottle of wine doesn't have to be expensive to be enjoyed. You can buy a wine you like at a good price if you know two things: the kinds of grapes you like, and the regions you like. We will explore both. I want you to know that you, too, can talk snobbishly about wine and enjoy it too."), _react.default.createElement("p", null, "Start exploring wines today. Click on any highlighted map below to begin exploring a country's wine regions, what grapes they use, and what kind of wines they produce.")), _react.default.createElement("div", {
-    className: "ui tab segment",
-    "data-tab": "second"
-  }, _react.default.createElement("p", null, "Regions are the name of the game when it comes to Old World wines. When people talk about Old World wines, they are talking about mainly European wines, and wine makers that have been in the industry as long as we can remember. New World wines, on the other hand, refer to wines from the Americas, Australia, Africa, and other new players to the wine game. When it comes to branding, the main difference between Old and New World wines are how they're marketed. Old World wines are marketed by the region in which they're grown. Meanwhile, New World wines are sold by grape.")), _react.default.createElement("div", {
-    className: "ui tab segment",
-    "data-tab": "third"
-  }, _react.default.createElement("p", null, "When people drink wine, they think about the grapes. This hasn't always been the way we think about wine. In fact, it was only until the 'New World' wines rose in popularity that consumers knew what grapes they were drinking. Now, consumers have come to expect to know what they're drinking, which forced Old World producers to include this information on their bottles. While Old World wines are still sold by region, you can find the grape information on the back of the label or online. Many Old World regions have laws that regulate the types of grape you can use in a wine, so once you understand what regions use what grapes, you can make a more informed purchase."))));
+  }, _react.default.createElement("h1", null, "Gabby's World by Wine")));
 };
 
 var _default = Navbar;
@@ -349,7 +329,9 @@ function (_Component) {
           hover: {
             "fill-opacity": 0.8,
             cursor: "pointer"
-          },
+          }
+        },
+        series: {
           regions: [{
             values: {
               'FR': '#800080',
@@ -393,6 +375,9 @@ function (_Component) {
             },
             attribute: 'fill'
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
       },
       ES: {
@@ -422,6 +407,9 @@ function (_Component) {
             },
             attribute: 'fill'
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
       },
       AR: {
@@ -449,6 +437,9 @@ function (_Component) {
             },
             attribute: 'fill'
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
       },
       US: {
@@ -476,6 +467,9 @@ function (_Component) {
               'US-OR': '#9400D3'
             }
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
       },
       ZA: {
@@ -501,40 +495,169 @@ function (_Component) {
               'ZA-WC': 'indigo'
             }
           }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this.handleRegionClick(event, code, _this.props);
         }
-      }
+      },
+      localRange: ''
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleRegionClick = _this.handleRegionClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleCloseClick = _this.handleCloseClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.resetClick = _this.resetClick.bind(_assertThisInitialized(_assertThisInitialized(_this))); //this.createMaps = this.createMaps.bind(this)
+
     return _this;
   }
 
   _createClass(WineMap, [{
     key: "componentWillMount",
     value: function componentWillMount() {
-      this.props.getCountries();
+      this.props.getRegions();
+      this.props.getCountries(); // this.createMaps(this.props.countries);
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var map = document.getElementById("world-map");
       $(map).vectorMap(this.state.worldMap);
+    } // createMaps(mapArray) {
+    //   console.log('do we get here')
+    //   const newMapArray = mapArray.forEach(map => {
+    //     let regions = this.props.regions.filter(region => region.countryId === map.id)
+    //     console.log(regions)
+    //     return {
+    //       map: map.mapName,
+    //       backgroundColor: "transparent",
+    //       zoomOnScroll: false,
+    //       regionStyle: {
+    //         initial: {
+    //           fill: "white",
+    //           "fill-opacity": 1,
+    //           stroke: "none",
+    //           "stroke-width": 0,
+    //           "stroke-opacity": 1
+    //         },
+    //         hover: {
+    //           "fill-opacity": 0.8,
+    //           cursor: "pointer"
+    //         }
+    //       },
+    //       series: {
+    //         regions: [{
+    //           values: {
+    //             'FR': '#800080',
+    //             'ZA': '#8B008B',
+    //             'US': '#9400D3',
+    //             'AR': '#9932CC',
+    //             'ES': '#4B0082'
+    //           },
+    //           attribute: 'fill'
+    //         }]
+    //       }
+    //     }
+    //   });
+    //   console.log(newMapArray)
+    // }
+
+  }, {
+    key: "handleRegionClick",
+    value: function handleRegionClick(event, code) {
+      var localRegion = this.props.regions.find(function (el) {
+        return el.value === code;
+      });
+      this.setState({
+        localRegion: localRegion
+      });
     }
   }, {
     key: "handleClick",
     value: function handleClick(event, code) {
-      var newMap = this.props.countries.find(function (el) {
-        return el.code === code;
+      var tooltips = document.getElementsByClassName('jvectormap-tip');
+      Array.prototype.forEach.call(tooltips, function (el) {
+        return el.parentNode.removeChild(el);
       });
       var map = document.getElementById("world-map");
-      $(map).vectorMap(newMap.mapName);
+      var oldMap = document.getElementsByClassName('jvectormap-container');
+      oldMap[0].parentNode.removeChild(oldMap[0]);
+      $(map).vectorMap(this.state[code]);
+    }
+  }, {
+    key: "handleCloseClick",
+    value: function handleCloseClick() {
+      this.setState({
+        localRegion: ''
+      });
+    }
+  }, {
+    key: "resetClick",
+    value: function resetClick() {
+      var tooltips = document.getElementsByClassName('jvectormap-tip');
+      Array.prototype.forEach.call(tooltips, function (el) {
+        return el.parentNode.removeChild(el);
+      });
+      var map = document.getElementById("world-map");
+      var oldMap = document.getElementsByClassName('jvectormap-container');
+      if (oldMap[0]) oldMap[0].parentNode.removeChild(oldMap[0]);
+      $(map).vectorMap(this.state.worldMap);
     }
   }, {
     key: "render",
     value: function render() {
+      var region = this.state.localRegion;
       return _react.default.createElement("div", {
+        className: "flex"
+      }, _react.default.createElement("button", {
+        onClick: this.resetClick,
+        className: "ui button"
+      }, "Reset"), _react.default.createElement("div", {
         id: "world-map",
         className: "map"
-      });
+      }), !!region && _react.default.createElement("div", {
+        className: "ui modal pop-up"
+      }, _react.default.createElement("i", {
+        className: "close icon",
+        onClick: this.handleCloseClick
+      }), _react.default.createElement("div", {
+        className: "header"
+      }, region.name), _react.default.createElement("div", {
+        className: "image content"
+      }, _react.default.createElement("img", {
+        className: "image",
+        src: "css/loire-valley.jpg"
+      })), _react.default.createElement("div", {
+        className: "description"
+      }, _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Grape of Fame:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.fameGrape)), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Other Grapes:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.grapes)), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Primary Flavors:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.flavors)), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Fun Facts:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.description), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "column-one-fourth"
+      }, "Things to Say:"), _react.default.createElement("div", {
+        className: "column-three-fourths"
+      }, region.quote))))));
     }
   }]);
 
@@ -544,9 +667,11 @@ function (_Component) {
 }(_react.Component);
 
 var mapState = function mapState(_ref) {
-  var countries = _ref.countries;
+  var countries = _ref.countries,
+      regions = _ref.regions;
   return {
-    countries: countries
+    countries: countries,
+    regions: regions
   };
 };
 
@@ -554,6 +679,9 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     getCountries: function getCountries() {
       dispatch((0, _store.fetchCountries)());
+    },
+    getRegions: function getRegions() {
+      dispatch((0, _store.fetchRegions)());
     }
   };
 };
@@ -712,10 +840,24 @@ Object.keys(_countries).forEach(function (key) {
   });
 });
 
+var _regions = _interopRequireDefault(__webpack_require__(/*! ./regions */ "./client/store/regions.js"));
+
+Object.keys(_regions).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _regions[key];
+    }
+  });
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducer = (0, _redux.combineReducers)({
-  countries: _countries.default
+  countries: _countries.default,
+  regions: _regions.default
 });
 var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk.default, (0, _reduxLogger.createLogger)({
   collapsed: true
@@ -723,6 +865,62 @@ var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.app
 var store = (0, _redux.createStore)(reducer, middleware);
 var _default = store;
 exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/store/regions.js":
+/*!*********************************!*\
+  !*** ./client/store/regions.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+exports.fetchRegions = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GET_REGIONS = 'GET_REGIONS';
+
+var getRegions = function getRegions(regions) {
+  return {
+    type: GET_REGIONS,
+    regions: regions
+  };
+};
+
+var fetchRegions = function fetchRegions() {
+  return function (dispatch) {
+    _axios.default.get('/api/regions').then(function (res) {
+      return dispatch(getRegions(res.data));
+    }).catch(function (err) {
+      return console.error(err);
+    });
+  };
+};
+
+exports.fetchRegions = fetchRegions;
+
+function _default() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case GET_REGIONS:
+      return action.regions;
+
+    default:
+      return state;
+  }
+}
 
 /***/ }),
 
