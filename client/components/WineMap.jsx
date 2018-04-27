@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchCountries, fetchRegions } from '../store';
+import { fetchCountries, fetchRegions, fetchRegionGrapes } from '../store';
 import { connect } from 'react-redux';
 // const reactJvectormap = require("react-jvectormap")
 
@@ -181,7 +181,8 @@ class WineMap extends Component {
         },
         onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
       },
-      localRange: ''
+      localRange: '',
+      regionGrapes: ''
 
     };
     this.handleClick = this.handleClick.bind(this);
@@ -201,6 +202,8 @@ class WineMap extends Component {
     const map = document.getElementById("world-map")
     $(map).vectorMap(this.state.worldMap);
   }
+
+  //trying to create a function that will generate a map bassed on the map name (same defaults for all maps)
 
   // createMaps(mapArray) {
   //   console.log('do we get here')
@@ -243,7 +246,9 @@ class WineMap extends Component {
 
   handleRegionClick(event, code) {
     const localRegion = this.props.regions.find(el => el.value === code);
-    this.setState({ localRegion });
+    const regionGrapes = localRegion.grapes.map(el => el.name).join(', ')
+    this.setState({ localRegion, regionGrapes });
+
   }
 
   handleClick(event, code) {
@@ -257,7 +262,7 @@ class WineMap extends Component {
   }
 
   handleCloseClick() {
-    this.setState({ localRegion: '' })
+    this.setState({ localRegion: '', regionGrapes: '' })
   }
 
   resetClick() {
@@ -271,6 +276,7 @@ class WineMap extends Component {
 
   render() {
     const region = this.state.localRegion;
+
     return (
       <div className="flex">
         <button onClick={this.resetClick} className="ui button">Reset</button>
@@ -284,13 +290,10 @@ class WineMap extends Component {
             </div>
             <div className="description">
               <div className="row">
-                <div className="column-one-fourth">Grape of Fame:</div>
-                <div className="column-three-fourths">{region.fameGrape}</div>
+                <div className="column-one-fourth">Grapes:</div>
+                <div className="column-three-fourths">{this.state.regionGrapes}</div>
               </div>
-              <div className="row">
-                <div className="column-one-fourth">Other Grapes:</div>
-                <div className="column-three-fourths">{region.grapes}</div>
-              </div>
+
               <div className="row">
                 <div className="column-one-fourth">Primary Flavors:</div>
                 <div className="column-three-fourths">{region.flavors}</div>
@@ -318,6 +321,9 @@ const mapDispatch = (dispatch) => ({
   },
   getRegions: () => {
     dispatch(fetchRegions())
+  },
+  getGrapes: (regionId) => {
+    dispatch(fetchRegionGrapes(regionId));
   }
 });
 

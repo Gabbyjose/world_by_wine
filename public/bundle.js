@@ -500,7 +500,8 @@ function (_Component) {
           return _this.handleRegionClick(event, code, _this.props);
         }
       },
-      localRange: ''
+      localRange: '',
+      regionGrapes: ''
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleRegionClick = _this.handleRegionClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -521,7 +522,8 @@ function (_Component) {
     value: function componentDidMount() {
       var map = document.getElementById("world-map");
       $(map).vectorMap(this.state.worldMap);
-    } // createMaps(mapArray) {
+    } //trying to create a function that will generate a map bassed on the map name (same defaults for all maps)
+    // createMaps(mapArray) {
     //   console.log('do we get here')
     //   const newMapArray = mapArray.forEach(map => {
     //     let regions = this.props.regions.filter(region => region.countryId === map.id)
@@ -566,8 +568,12 @@ function (_Component) {
       var localRegion = this.props.regions.find(function (el) {
         return el.value === code;
       });
+      var regionGrapes = localRegion.grapes.map(function (el) {
+        return el.name;
+      }).join(', ');
       this.setState({
-        localRegion: localRegion
+        localRegion: localRegion,
+        regionGrapes: regionGrapes
       });
     }
   }, {
@@ -586,7 +592,8 @@ function (_Component) {
     key: "handleCloseClick",
     value: function handleCloseClick() {
       this.setState({
-        localRegion: ''
+        localRegion: '',
+        regionGrapes: ''
       });
     }
   }, {
@@ -631,15 +638,9 @@ function (_Component) {
         className: "row"
       }, _react.default.createElement("div", {
         className: "column-one-fourth"
-      }, "Grape of Fame:"), _react.default.createElement("div", {
+      }, "Grapes:"), _react.default.createElement("div", {
         className: "column-three-fourths"
-      }, region.fameGrape)), _react.default.createElement("div", {
-        className: "row"
-      }, _react.default.createElement("div", {
-        className: "column-one-fourth"
-      }, "Other Grapes:"), _react.default.createElement("div", {
-        className: "column-three-fourths"
-      }, region.grapes)), _react.default.createElement("div", {
+      }, this.state.regionGrapes)), _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement("div", {
         className: "column-one-fourth"
@@ -682,6 +683,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     getRegions: function getRegions() {
       dispatch((0, _store.fetchRegions)());
+    },
+    getGrapes: function getGrapes(regionId) {
+      dispatch((0, _store.fetchRegionGrapes)(regionId));
     }
   };
 };
@@ -803,6 +807,62 @@ function _default() {
 
 /***/ }),
 
+/***/ "./client/store/grapes.js":
+/*!********************************!*\
+  !*** ./client/store/grapes.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+exports.fetchRegionGrapes = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GET_GRAPES = 'GET_GRAPES';
+
+var getGrapes = function getGrapes(grapes) {
+  return {
+    type: GET_GRAPES,
+    grapes: grapes
+  };
+};
+
+var fetchRegionGrapes = function fetchRegionGrapes(region) {
+  return function (dispatch) {
+    _axios.default.get("/api/regions/".concat(region, "/grapes")).then(function (res) {
+      return dispatch(getGrapes(res.data));
+    }).catch(function (err) {
+      return console.log(err);
+    });
+  };
+};
+
+exports.fetchRegionGrapes = fetchRegionGrapes;
+
+function _default() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case GET_GRAPES:
+      return action.grapes;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
 /***/ "./client/store/index.js":
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
@@ -853,11 +913,25 @@ Object.keys(_regions).forEach(function (key) {
   });
 });
 
+var _grapes = _interopRequireDefault(__webpack_require__(/*! ./grapes */ "./client/store/grapes.js"));
+
+Object.keys(_grapes).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _grapes[key];
+    }
+  });
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducer = (0, _redux.combineReducers)({
   countries: _countries.default,
-  regions: _regions.default
+  regions: _regions.default,
+  grapes: _grapes.default
 });
 var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk.default, (0, _reduxLogger.createLogger)({
   collapsed: true
