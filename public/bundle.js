@@ -303,7 +303,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.getPrototypeOf || functio
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-// const reactJvectormap = require("react-jvectormap")
 var WineMap =
 /*#__PURE__*/
 function (_Component) {
@@ -347,167 +346,14 @@ function (_Component) {
           return _this.handleClick(event, code, _this.props);
         }
       },
-      FR: {
-        map: 'fr_regions_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'FR-F': '#9400D3',
-              'FR-B': '#4B0082',
-              'FR-D': '#800080',
-              'FR-V': '#8B008B',
-              'FR-A': '#9932CC'
-            },
-            attribute: 'fill'
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
-      ES: {
-        map: 'es_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'ES-BU': '#800080',
-              'ES-LO': '#4B0082',
-              'ES-T': '#8B008B',
-              'ES-PO': '#9932CC'
-            },
-            attribute: 'fill'
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
-      AR: {
-        map: 'ar_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'AR-M': '#4B0082',
-              'AR-A': '#9932CC'
-            },
-            attribute: 'fill'
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
-      US: {
-        map: 'us_aea',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'US-CA': 'indigo',
-              'US-NY': '#9932CC',
-              'US-OR': '#9400D3'
-            }
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
-      ZA: {
-        map: 'za_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'ZA-WC': 'indigo'
-            }
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
       localRange: '',
       regionGrapes: ''
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleRegionClick = _this.handleRegionClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleCloseClick = _this.handleCloseClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.resetClick = _this.resetClick.bind(_assertThisInitialized(_assertThisInitialized(_this))); //this.createMaps = this.createMaps.bind(this)
-
+    _this.resetClick = _this.resetClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.createMaps = _this.createMaps.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -515,53 +361,56 @@ function (_Component) {
     key: "componentWillMount",
     value: function componentWillMount() {
       this.props.getRegions();
-      this.props.getCountries(); // this.createMaps(this.props.countries);
+      this.props.getCountries();
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var map = document.getElementById("world-map");
       $(map).vectorMap(this.state.worldMap);
-    } //trying to create a function that will generate a map bassed on the map name (same defaults for all maps)
-    // createMaps(mapArray) {
-    //   console.log('do we get here')
-    //   const newMapArray = mapArray.forEach(map => {
-    //     let regions = this.props.regions.filter(region => region.countryId === map.id)
-    //     console.log(regions)
-    //     return {
-    //       map: map.mapName,
-    //       backgroundColor: "transparent",
-    //       zoomOnScroll: false,
-    //       regionStyle: {
-    //         initial: {
-    //           fill: "white",
-    //           "fill-opacity": 1,
-    //           stroke: "none",
-    //           "stroke-width": 0,
-    //           "stroke-opacity": 1
-    //         },
-    //         hover: {
-    //           "fill-opacity": 0.8,
-    //           cursor: "pointer"
-    //         }
-    //       },
-    //       series: {
-    //         regions: [{
-    //           values: {
-    //             'FR': '#800080',
-    //             'ZA': '#8B008B',
-    //             'US': '#9400D3',
-    //             'AR': '#9932CC',
-    //             'ES': '#4B0082'
-    //           },
-    //           attribute: 'fill'
-    //         }]
-    //       }
-    //     }
-    //   });
-    //   console.log(newMapArray)
-    // }
+    }
+  }, {
+    key: "createMaps",
+    value: function createMaps(mapName) {
+      var _this2 = this;
 
+      var country = this.props.countries.find(function (el) {
+        return el.mapName === mapName;
+      });
+      var colors = ['#800080', '#8B008B', '#9400D3', '#9932CC', '#4B0082'];
+      var regionValues = {};
+      country.regions.forEach(function (region, index) {
+        regionValues[region.value + ''] = colors[index];
+      });
+      var newMap = {
+        map: mapName,
+        backgroundColor: "transparent",
+        zoomOnScroll: false,
+        regionStyle: {
+          initial: {
+            fill: "white",
+            "fill-opacity": 1,
+            stroke: "none",
+            "stroke-width": 0,
+            "stroke-opacity": 1
+          },
+          hover: {
+            "fill-opacity": 0.8,
+            cursor: "pointer"
+          }
+        },
+        series: {
+          regions: [{
+            values: regionValues,
+            attribute: 'fill'
+          }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this2.handleRegionClick(event, code, _this2.props);
+        }
+      };
+      return newMap;
+    }
   }, {
     key: "handleRegionClick",
     value: function handleRegionClick(event, code) {
@@ -579,6 +428,10 @@ function (_Component) {
   }, {
     key: "handleClick",
     value: function handleClick(event, code) {
+      var country = this.props.countries.find(function (el) {
+        return el.code === code;
+      });
+      var newMap = this.createMaps(country.mapName);
       var tooltips = document.getElementsByClassName('jvectormap-tip');
       Array.prototype.forEach.call(tooltips, function (el) {
         return el.parentNode.removeChild(el);
@@ -586,7 +439,7 @@ function (_Component) {
       var map = document.getElementById("world-map");
       var oldMap = document.getElementsByClassName('jvectormap-container');
       oldMap[0].parentNode.removeChild(oldMap[0]);
-      $(map).vectorMap(this.state[code]);
+      $(map).vectorMap(newMap);
     }
   }, {
     key: "handleCloseClick",

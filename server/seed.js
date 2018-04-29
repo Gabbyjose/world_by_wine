@@ -8,7 +8,7 @@ async function seed() {
   await Promise.all([
     Country.create({
       name: "France",
-      mapName: "fr_region_mill",
+      mapName: "fr_regions_mill",
       code: 'FR'
     }),
     Country.create({
