@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <WineMap />
+
       <Routes />
     </div>
   );
