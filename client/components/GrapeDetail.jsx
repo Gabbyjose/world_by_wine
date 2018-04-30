@@ -7,13 +7,19 @@ class GrapeDetail extends Component {
   }
 
   render() {
-    return (<h1>You've made it to grape search for {this.props.grape.name}</h1>);
+    console.log(this.props.grape.regions)
+    return (<div className="browseGrape"><h2>Grape: {this.props.grape.name}</h2>
+      <h3>Regions:
+      <ul>
+          {this.props.grape.regions.map(el => <li>{el.name}</li>)}
+        </ul>
+      </h3>
+    </div>);
   }
 }
 
 const mapState = (state, ownProps) => {
   const grapeId = +ownProps.match.params.id;
-  console.log(grapeId, state)
   return {
     grape: state.grapes.find(el => el.id === grapeId)
   }

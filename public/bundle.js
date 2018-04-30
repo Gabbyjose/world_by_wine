@@ -263,7 +263,12 @@ function (_Component) {
   _createClass(GrapeDetail, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("h1", null, "You've made it to grape search for ", this.props.grape.name);
+      console.log(this.props.grape.regions);
+      return _react.default.createElement("div", {
+        className: "browseGrape"
+      }, _react.default.createElement("h2", null, "Grape: ", this.props.grape.name), _react.default.createElement("h3", null, "Regions:", _react.default.createElement("ul", null, this.props.grape.regions.map(function (el) {
+        return _react.default.createElement("li", null, el.name);
+      }))));
     }
   }]);
 
@@ -274,7 +279,6 @@ function (_Component) {
 
 var mapState = function mapState(state, ownProps) {
   var grapeId = +ownProps.match.params.id;
-  console.log(grapeId, state);
   return {
     grape: state.grapes.find(function (el) {
       return el.id === grapeId;
@@ -348,7 +352,9 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement("h2", null, "Browse Grapes"), _react.default.createElement("ul", null, this.props.grapes.map(function (grape) {
+      return _react.default.createElement("div", {
+        className: "browseGrape"
+      }, _react.default.createElement("h2", null, "Browse Grapes"), _react.default.createElement("ul", null, this.props.grapes.map(function (grape) {
         return _react.default.createElement("li", {
           key: grape.name
         }, _react.default.createElement(_reactRouterDom.Link, {

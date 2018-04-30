@@ -14,7 +14,7 @@ class GrapeSearch extends Component {
 
   render() {
     return (
-      <div>
+      <div className="browseGrape">
         <h2>Browse Grapes</h2>
         <ul>
           {this.props.grapes.map(grape => (<li key={grape.name}><Link to={`/grapes/${+grape.id}`}>{grape.name}</Link></li>))}

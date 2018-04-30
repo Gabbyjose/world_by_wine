@@ -5,6 +5,9 @@ const Grapes = db.define("grape", {
   name: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  flavors: {
+    type: Sequelize.STRING
   }
 });
 
