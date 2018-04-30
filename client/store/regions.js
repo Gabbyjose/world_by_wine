@@ -10,6 +10,7 @@ export const fetchRegions = () => (dispatch) => {
     .catch(err => console.error(err))
 }
 
+
 export default function (state = [], action) {
   switch (action.type) {
     case GET_REGIONS:

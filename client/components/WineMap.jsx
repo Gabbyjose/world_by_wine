@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { fetchCountries, fetchRegions } from '../store';
+import { fetchCountries, fetchRegions, fetchRegionGrapes } from '../store';
 import { connect } from 'react-redux';
-// const reactJvectormap = require("react-jvectormap")
 
 class WineMap extends Component {
   constructor(props) {
@@ -38,163 +37,21 @@ class WineMap extends Component {
         },
         onRegionClick: (event, code) => this.handleClick(event, code, this.props)
       },
-      FR: {
-        map: 'fr_regions_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'FR-F': '#9400D3',
-              'FR-B': '#4B0082',
-              'FR-D': '#800080',
-              'FR-V': '#8B008B',
-              'FR-A': '#9932CC'
-            },
-            attribute: 'fill'
-          }]
-        },
-        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
-      },
-      ES: {
-        map: 'es_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'ES-BU': '#800080',
-              'ES-LO': '#4B0082',
-              'ES-T': '#8B008B',
-              'ES-PO': '#9932CC'
-            },
-            attribute: 'fill'
-          }]
-        },
-        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
-      },
-      AR: {
-        map: 'ar_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'AR-M': '#4B0082',
-              'AR-A': '#9932CC',
-            },
-            attribute: 'fill'
-          }]
-        },
-        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
-      },
-      US: {
-        map: 'us_aea',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'US-CA': 'indigo',
-              'US-NY': '#9932CC',
-              'US-OR': '#9400D3'
-            }
-          }]
-        },
-        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
-      },
-      ZA: {
-        map: 'za_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'ZA-WC': 'indigo'
-            }
-          }]
-        },
-        onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
-      },
-      localRange: ''
+      localRange: '',
+      regionGrapes: ''
 
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleRegionClick = this.handleRegionClick.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.resetClick = this.resetClick.bind(this);
-    //this.createMaps = this.createMaps.bind(this)
+    this.createMaps = this.createMaps.bind(this)
   }
 
   componentWillMount() {
     this.props.getRegions();
     this.props.getCountries();
-    // this.createMaps(this.props.countries);
+
   }
 
   componentDidMount() {
@@ -202,62 +59,67 @@ class WineMap extends Component {
     $(map).vectorMap(this.state.worldMap);
   }
 
-  // createMaps(mapArray) {
-  //   console.log('do we get here')
-  //   const newMapArray = mapArray.forEach(map => {
-  //     let regions = this.props.regions.filter(region => region.countryId === map.id)
-  //     console.log(regions)
-  //     return {
-  //       map: map.mapName,
-  //       backgroundColor: "transparent",
-  //       zoomOnScroll: false,
-  //       regionStyle: {
-  //         initial: {
-  //           fill: "white",
-  //           "fill-opacity": 1,
-  //           stroke: "none",
-  //           "stroke-width": 0,
-  //           "stroke-opacity": 1
-  //         },
-  //         hover: {
-  //           "fill-opacity": 0.8,
-  //           cursor: "pointer"
-  //         }
-  //       },
-  //       series: {
-  //         regions: [{
-  //           values: {
-  //             'FR': '#800080',
-  //             'ZA': '#8B008B',
-  //             'US': '#9400D3',
-  //             'AR': '#9932CC',
-  //             'ES': '#4B0082'
-  //           },
-  //           attribute: 'fill'
-  //         }]
-  //       }
-  //     }
-  //   });
-  //   console.log(newMapArray)
-  // }
+  createMaps(mapName) {
+    const country = this.props.countries.find(el => el.mapName === mapName)
+    const colors = ['#800080',
+      '#8B008B',
+      '#9400D3',
+      '#9932CC',
+      '#4B0082']
+    const regionValues = {}
+    country.regions.forEach((region, index) => { regionValues[region.value + ''] = colors[index] })
+
+    const newMap = {
+      map: mapName,
+      backgroundColor: "transparent",
+      zoomOnScroll: false,
+      regionStyle: {
+        initial: {
+          fill: "white",
+          "fill-opacity": 1,
+          stroke: "none",
+          "stroke-width": 0,
+          "stroke-opacity": 1
+        },
+        hover: {
+          "fill-opacity": 0.8,
+          cursor: "pointer"
+        }
+      },
+      series: {
+        regions: [{
+          values: regionValues,
+          attribute: 'fill'
+        }]
+      },
+      onRegionClick: (event, code) => this.handleRegionClick(event, code, this.props)
+    }
+
+    return newMap;
+  }
 
   handleRegionClick(event, code) {
+
     const localRegion = this.props.regions.find(el => el.value === code);
-    this.setState({ localRegion });
+    const regionGrapes = localRegion.grapes.map(el => el.name).join(', ')
+    this.setState({ localRegion, regionGrapes });
+
   }
 
   handleClick(event, code) {
+    const country = this.props.countries.find(el => el.code === code)
+    const newMap = this.createMaps(country.mapName);
     const tooltips = document.getElementsByClassName('jvectormap-tip');
     Array.prototype.forEach.call(tooltips, el => el.parentNode.removeChild(el));
 
     const map = document.getElementById("world-map")
     const oldMap = document.getElementsByClassName('jvectormap-container');
     oldMap[0].parentNode.removeChild(oldMap[0]);
-    $(map).vectorMap(this.state[code]);
+    $(map).vectorMap(newMap);
   }
 
   handleCloseClick() {
-    this.setState({ localRegion: '' })
+    this.setState({ localRegion: '', regionGrapes: '' })
   }
 
   resetClick() {
@@ -271,6 +133,7 @@ class WineMap extends Component {
 
   render() {
     const region = this.state.localRegion;
+
     return (
       <div className="flex">
         <button onClick={this.resetClick} className="ui button">Reset</button>
@@ -284,13 +147,10 @@ class WineMap extends Component {
             </div>
             <div className="description">
               <div className="row">
-                <div className="column-one-fourth">Grape of Fame:</div>
-                <div className="column-three-fourths">{region.fameGrape}</div>
+                <div className="column-one-fourth">Grapes:</div>
+                <div className="column-three-fourths">{this.state.regionGrapes}</div>
               </div>
-              <div className="row">
-                <div className="column-one-fourth">Other Grapes:</div>
-                <div className="column-three-fourths">{region.grapes}</div>
-              </div>
+
               <div className="row">
                 <div className="column-one-fourth">Primary Flavors:</div>
                 <div className="column-three-fourths">{region.flavors}</div>
@@ -318,6 +178,9 @@ const mapDispatch = (dispatch) => ({
   },
   getRegions: () => {
     dispatch(fetchRegions())
+  },
+  getGrapes: (regionId) => {
+    dispatch(fetchRegionGrapes(regionId));
   }
 });
 

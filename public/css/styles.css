@@ -150,3 +150,28 @@ nav {
   flex-direction: column;
   align-items: center;
 }
+
+li {
+  list-style: none;
+  padding: 1em;
+}
+
+li a {
+  color: white
+}
+
+h2:first-child {
+  text-align: center;
+  color: #eee;
+  margin-top: 1em;
+}
+
+.browseGrape {
+  background-color: rgb(128,128,128, .6);
+  margin: 0 4em 4em 4em;
+  border-radius: 25px;
+}
+
+h3 {
+  padding: 1em;
+}

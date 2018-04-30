@@ -92,7 +92,7 @@ var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_mod
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-  return _react.default.createElement("div", null, _react.default.createElement(_Navbar.default, null), _react.default.createElement(_WineMap.default, null), _react.default.createElement(_Routes.default, null));
+  return _react.default.createElement("div", null, _react.default.createElement(_Navbar.default, null), _react.default.createElement(_Routes.default, null));
 };
 
 module.exports = App;
@@ -122,7 +122,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Navbar = function Navbar() {
   return _react.default.createElement("div", null, _react.default.createElement("nav", null, _react.default.createElement(_reactRouterDom.Link, {
-    to: "/home"
+    to: "/"
   }, "Home"), _react.default.createElement(_reactRouterDom.Link, {
     to: "/grapes"
   }, "Grape Search")), _react.default.createElement("div", {
@@ -189,11 +189,12 @@ function (_Component) {
     key: "render",
     value: function render() {
       return _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
         path: "/",
-        component: _components.Home
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/map",
         component: _components.WineMap
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/grapes/:id",
+        component: _components.GrapeDetail
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/grapes",
         component: _components.GrapeSearch
@@ -207,6 +208,86 @@ function (_Component) {
 }(_react.Component);
 
 var _default = Routes;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/components/GrapeDetail.jsx":
+/*!*******************************************!*\
+  !*** ./client/components/GrapeDetail.jsx ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } _setPrototypeOf(subClass.prototype, superClass && superClass.prototype); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.getPrototypeOf || function _getPrototypeOf(o) { return o.__proto__; }; return _getPrototypeOf(o); }
+
+var GrapeDetail =
+/*#__PURE__*/
+function (_Component) {
+  function GrapeDetail() {
+    _classCallCheck(this, GrapeDetail);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(GrapeDetail).call(this));
+  }
+
+  _createClass(GrapeDetail, [{
+    key: "render",
+    value: function render() {
+      console.log(this.props.grape.regions);
+      return _react.default.createElement("div", {
+        className: "browseGrape"
+      }, _react.default.createElement("h2", null, "Grape: ", this.props.grape.name), _react.default.createElement("h3", null, "Regions:", _react.default.createElement("ul", null, this.props.grape.regions.map(function (el) {
+        return _react.default.createElement("li", null, el.name);
+      }))));
+    }
+  }]);
+
+  _inherits(GrapeDetail, _Component);
+
+  return GrapeDetail;
+}(_react.Component);
+
+var mapState = function mapState(state, ownProps) {
+  var grapeId = +ownProps.match.params.id;
+  return {
+    grape: state.grapes.find(function (el) {
+      return el.id === grapeId;
+    })
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapState)(GrapeDetail);
+
 exports.default = _default;
 
 /***/ }),
@@ -228,6 +309,12 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var _store = __webpack_require__(/*! ../store */ "./client/store/index.js");
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -238,6 +325,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
@@ -247,18 +338,59 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.getPrototypeOf || functio
 var GrapeSearch =
 /*#__PURE__*/
 function (_Component) {
-  function GrapeSearch() {
+  function GrapeSearch(props) {
     _classCallCheck(this, GrapeSearch);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GrapeSearch).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(GrapeSearch).call(this, props));
   }
+
+  _createClass(GrapeSearch, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchGrapes();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", {
+        className: "browseGrape"
+      }, _react.default.createElement("h2", null, "Browse Grapes"), _react.default.createElement("ul", null, this.props.grapes.map(function (grape) {
+        return _react.default.createElement("li", {
+          key: grape.name
+        }, _react.default.createElement(_reactRouterDom.Link, {
+          to: "/grapes/".concat(+grape.id)
+        }, grape.name));
+      })));
+    }
+  }]);
 
   _inherits(GrapeSearch, _Component);
 
   return GrapeSearch;
 }(_react.Component);
 
-exports.default = GrapeSearch;
+var mapState = function mapState(_ref) {
+  var countries = _ref.countries,
+      regions = _ref.regions,
+      grapes = _ref.grapes;
+  return {
+    countries: countries,
+    regions: regions,
+    grapes: grapes
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    fetchGrapes: function fetchGrapes() {
+      dispatch((0, _store.fetchAllGrapes)());
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapState, mapDispatch)(GrapeSearch);
+
+exports.default = _default;
 
 /***/ }),
 
@@ -303,7 +435,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.getPrototypeOf || functio
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-// const reactJvectormap = require("react-jvectormap")
 var WineMap =
 /*#__PURE__*/
 function (_Component) {
@@ -347,166 +478,14 @@ function (_Component) {
           return _this.handleClick(event, code, _this.props);
         }
       },
-      FR: {
-        map: 'fr_regions_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'FR-F': '#9400D3',
-              'FR-B': '#4B0082',
-              'FR-D': '#800080',
-              'FR-V': '#8B008B',
-              'FR-A': '#9932CC'
-            },
-            attribute: 'fill'
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
-      ES: {
-        map: 'es_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'ES-BU': '#800080',
-              'ES-LO': '#4B0082',
-              'ES-T': '#8B008B',
-              'ES-PO': '#9932CC'
-            },
-            attribute: 'fill'
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
-      AR: {
-        map: 'ar_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'AR-M': '#4B0082',
-              'AR-A': '#9932CC'
-            },
-            attribute: 'fill'
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
-      US: {
-        map: 'us_aea',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'US-CA': 'indigo',
-              'US-NY': '#9932CC',
-              'US-OR': '#9400D3'
-            }
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
-      ZA: {
-        map: 'za_mill',
-        backgroundColor: 'transparent',
-        zoomOnScroll: false,
-        regionStyle: {
-          initial: {
-            fill: 'white',
-            "fill-opacity": 1,
-            stroke: 'none',
-            "stroke-width": 0,
-            "stroke-opacity": 1
-          },
-          hover: {
-            "fill-opacity": 0.8,
-            cursor: 'pointer'
-          }
-        },
-        series: {
-          regions: [{
-            values: {
-              'ZA-WC': 'indigo'
-            }
-          }]
-        },
-        onRegionClick: function onRegionClick(event, code) {
-          return _this.handleRegionClick(event, code, _this.props);
-        }
-      },
-      localRange: ''
+      localRange: '',
+      regionGrapes: ''
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleRegionClick = _this.handleRegionClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleCloseClick = _this.handleCloseClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.resetClick = _this.resetClick.bind(_assertThisInitialized(_assertThisInitialized(_this))); //this.createMaps = this.createMaps.bind(this)
-
+    _this.resetClick = _this.resetClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.createMaps = _this.createMaps.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -514,65 +493,77 @@ function (_Component) {
     key: "componentWillMount",
     value: function componentWillMount() {
       this.props.getRegions();
-      this.props.getCountries(); // this.createMaps(this.props.countries);
+      this.props.getCountries();
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var map = document.getElementById("world-map");
       $(map).vectorMap(this.state.worldMap);
-    } // createMaps(mapArray) {
-    //   console.log('do we get here')
-    //   const newMapArray = mapArray.forEach(map => {
-    //     let regions = this.props.regions.filter(region => region.countryId === map.id)
-    //     console.log(regions)
-    //     return {
-    //       map: map.mapName,
-    //       backgroundColor: "transparent",
-    //       zoomOnScroll: false,
-    //       regionStyle: {
-    //         initial: {
-    //           fill: "white",
-    //           "fill-opacity": 1,
-    //           stroke: "none",
-    //           "stroke-width": 0,
-    //           "stroke-opacity": 1
-    //         },
-    //         hover: {
-    //           "fill-opacity": 0.8,
-    //           cursor: "pointer"
-    //         }
-    //       },
-    //       series: {
-    //         regions: [{
-    //           values: {
-    //             'FR': '#800080',
-    //             'ZA': '#8B008B',
-    //             'US': '#9400D3',
-    //             'AR': '#9932CC',
-    //             'ES': '#4B0082'
-    //           },
-    //           attribute: 'fill'
-    //         }]
-    //       }
-    //     }
-    //   });
-    //   console.log(newMapArray)
-    // }
+    }
+  }, {
+    key: "createMaps",
+    value: function createMaps(mapName) {
+      var _this2 = this;
 
+      var country = this.props.countries.find(function (el) {
+        return el.mapName === mapName;
+      });
+      var colors = ['#800080', '#8B008B', '#9400D3', '#9932CC', '#4B0082'];
+      var regionValues = {};
+      country.regions.forEach(function (region, index) {
+        regionValues[region.value + ''] = colors[index];
+      });
+      var newMap = {
+        map: mapName,
+        backgroundColor: "transparent",
+        zoomOnScroll: false,
+        regionStyle: {
+          initial: {
+            fill: "white",
+            "fill-opacity": 1,
+            stroke: "none",
+            "stroke-width": 0,
+            "stroke-opacity": 1
+          },
+          hover: {
+            "fill-opacity": 0.8,
+            cursor: "pointer"
+          }
+        },
+        series: {
+          regions: [{
+            values: regionValues,
+            attribute: 'fill'
+          }]
+        },
+        onRegionClick: function onRegionClick(event, code) {
+          return _this2.handleRegionClick(event, code, _this2.props);
+        }
+      };
+      return newMap;
+    }
   }, {
     key: "handleRegionClick",
     value: function handleRegionClick(event, code) {
       var localRegion = this.props.regions.find(function (el) {
         return el.value === code;
       });
+      var regionGrapes = localRegion.grapes.map(function (el) {
+        return el.name;
+      }).join(', ');
       this.setState({
-        localRegion: localRegion
+        localRegion: localRegion,
+        regionGrapes: regionGrapes
       });
     }
   }, {
     key: "handleClick",
     value: function handleClick(event, code) {
+      var country = this.props.countries.find(function (el) {
+        return el.code === code;
+      });
+      var newMap = this.createMaps(country.mapName);
       var tooltips = document.getElementsByClassName('jvectormap-tip');
       Array.prototype.forEach.call(tooltips, function (el) {
         return el.parentNode.removeChild(el);
@@ -580,13 +571,14 @@ function (_Component) {
       var map = document.getElementById("world-map");
       var oldMap = document.getElementsByClassName('jvectormap-container');
       oldMap[0].parentNode.removeChild(oldMap[0]);
-      $(map).vectorMap(this.state[code]);
+      $(map).vectorMap(newMap);
     }
   }, {
     key: "handleCloseClick",
     value: function handleCloseClick() {
       this.setState({
-        localRegion: ''
+        localRegion: '',
+        regionGrapes: ''
       });
     }
   }, {
@@ -631,15 +623,9 @@ function (_Component) {
         className: "row"
       }, _react.default.createElement("div", {
         className: "column-one-fourth"
-      }, "Grape of Fame:"), _react.default.createElement("div", {
+      }, "Grapes:"), _react.default.createElement("div", {
         className: "column-three-fourths"
-      }, region.fameGrape)), _react.default.createElement("div", {
-        className: "row"
-      }, _react.default.createElement("div", {
-        className: "column-one-fourth"
-      }, "Other Grapes:"), _react.default.createElement("div", {
-        className: "column-three-fourths"
-      }, region.grapes)), _react.default.createElement("div", {
+      }, this.state.regionGrapes)), _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement("div", {
         className: "column-one-fourth"
@@ -682,6 +668,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     getRegions: function getRegions() {
       dispatch((0, _store.fetchRegions)());
+    },
+    getGrapes: function getGrapes(regionId) {
+      dispatch((0, _store.fetchRegionGrapes)(regionId));
     }
   };
 };
@@ -706,11 +695,14 @@ var _GrapeSearch = _interopRequireDefault(__webpack_require__(/*! ./GrapeSearch.
 
 var _WineMap = _interopRequireDefault(__webpack_require__(/*! ./WineMap.jsx */ "./client/components/WineMap.jsx"));
 
+var _GrapeDetail = _interopRequireDefault(__webpack_require__(/*! ./GrapeDetail.jsx */ "./client/components/GrapeDetail.jsx"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
   GrapeSearch: _GrapeSearch.default,
-  WineMap: _WineMap.default
+  WineMap: _WineMap.default,
+  GrapeDetail: _GrapeDetail.default
 };
 
 /***/ }),
@@ -803,6 +795,74 @@ function _default() {
 
 /***/ }),
 
+/***/ "./client/store/grapes.js":
+/*!********************************!*\
+  !*** ./client/store/grapes.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+exports.fetchRegionGrapes = exports.fetchAllGrapes = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GET_GRAPES = 'GET_GRAPES';
+
+var getGrapes = function getGrapes(grapes) {
+  return {
+    type: GET_GRAPES,
+    grapes: grapes
+  };
+};
+
+var fetchAllGrapes = function fetchAllGrapes() {
+  return function (dispatch) {
+    _axios.default.get("/api/grapes").then(function (res) {
+      return dispatch(getGrapes(res.data));
+    }).catch(function (err) {
+      return console.log(err);
+    });
+  };
+};
+
+exports.fetchAllGrapes = fetchAllGrapes;
+
+var fetchRegionGrapes = function fetchRegionGrapes(region) {
+  return function (dispatch) {
+    _axios.default.get("/api/regions/".concat(region, "/grapes")).then(function (res) {
+      return dispatch(getGrapes(res.data));
+    }).catch(function (err) {
+      return console.log(err);
+    });
+  };
+};
+
+exports.fetchRegionGrapes = fetchRegionGrapes;
+
+function _default() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case GET_GRAPES:
+      return action.grapes;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
 /***/ "./client/store/index.js":
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
@@ -853,11 +913,25 @@ Object.keys(_regions).forEach(function (key) {
   });
 });
 
+var _grapes = _interopRequireDefault(__webpack_require__(/*! ./grapes */ "./client/store/grapes.js"));
+
+Object.keys(_grapes).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _grapes[key];
+    }
+  });
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducer = (0, _redux.combineReducers)({
   countries: _countries.default,
-  regions: _regions.default
+  regions: _regions.default,
+  grapes: _grapes.default
 });
 var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk.default, (0, _reduxLogger.createLogger)({
   collapsed: true

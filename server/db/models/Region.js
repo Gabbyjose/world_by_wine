@@ -10,10 +10,7 @@ const Region = db.define("region", {
     type: Sequelize.TEXT,
     allowNull: false
   },
-  fameGrape: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
+
   flavors: {
     type: Sequelize.STRING,
     allowNull: false
